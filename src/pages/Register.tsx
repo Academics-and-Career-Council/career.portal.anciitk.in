@@ -1,27 +1,22 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Row, Col, Form, Input, Button, Checkbox } from "antd";
+import {Link, RouteComponentProps} from 'react-router-dom'
+import { Row, Col, Form, Input, Button } from "antd";
 import { MailOutlined, LockOutlined } from "@ant-design/icons";
 import { Helmet } from "react-helmet";
-import { useSetRecoilState } from "recoil";
+import logo from "../assets/img/logo192.png";
 import "../styles/login.css";
 
-import { SESSION_STATE } from "../store";
-import logo from "../assets/img/logo192.png";
-
-const Login = (props: any) => {
-  const setActive = useSetRecoilState(SESSION_STATE);
-
-  const submitHandler = (values: any) => {
-    setActive((curr) => ({ role: curr.role, active: true }));
+const Login = (props: RouteComponentProps) => {
+  
+  const onSubmit = (values: any) => {
     console.log(values);
-    props.history.push("/");
-  };
-
+    props.history.push('/login')
+  }
+  
   return (
     <React.Fragment>
       <Helmet>
-        <title>Login</title>
+        <title>Register</title>
       </Helmet>
       <Row align="middle" justify="center">
         <Col span={18}>
@@ -35,12 +30,14 @@ const Login = (props: any) => {
           </div>
         </Col>
         <Col span={8}>
-          <Form method="POST" onFinish={submitHandler}>
+          <Form method="POST" onFinish={onSubmit}>
             <Form.Item
               name="email"
-              rules={[{ required: true, message: "Please input your email" }]}
+              rules={[
+                { required: true, message: "Please input your email" },
+              ]}
             >
-              <Input prefix={<MailOutlined />} placeholder="Registered Email" />
+              <Input prefix={<MailOutlined />} placeholder="IITK Email" type='email' />
             </Form.Item>
             <Form.Item
               name="password"
@@ -50,20 +47,19 @@ const Login = (props: any) => {
             >
               <Input.Password
                 prefix={<LockOutlined />}
-                placeholder="Password"
+                placeholder="Set Password"
               />
             </Form.Item>
-            <Form.Item>
-              <Row justify='space-between'>
-                <Col>
-                  <Form.Item name="remember" valuePropName="checked" noStyle>
-                    <Checkbox>Remember me</Checkbox>
-                  </Form.Item>
-                </Col>
-                <Col>
-                  <Link to="/reset">Forgot password?</Link>
-                </Col>
-              </Row>
+            <Form.Item
+              name="confirmPassword"
+              rules={[
+                { required: true, message: "Please input your password again" },
+              ]}
+            >
+              <Input.Password
+                prefix={<LockOutlined />}
+                placeholder="Confirm Password"
+              />
             </Form.Item>
             <Form.Item>
               <Button
@@ -71,9 +67,9 @@ const Login = (props: any) => {
                 htmlType="submit"
                 style={{ width: "100%" }}
               >
-                Login
+                Create Account
               </Button>
-              or <Link to="/register">Register Now!</Link>
+              <Link to="/login">Already registered?</Link>
             </Form.Item>
           </Form>
         </Col>
