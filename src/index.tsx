@@ -1,12 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {RecoilRoot} from 'recoil'
+import { RelayEnvironmentProvider } from 'react-relay/hooks'
+import 'antd/dist/antd.css'
+
+import environment from './relay/environment'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <RelayEnvironmentProvider environment={environment()}>
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
+    </RelayEnvironmentProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

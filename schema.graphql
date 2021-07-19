@@ -1,0 +1,56 @@
+type User{
+  id: ID!
+  username: String!
+  password: String!
+  rollno: Int!
+  admin: Boolean!
+  token: String!
+}
+
+enum JobType{
+  Internal
+  External
+}
+
+type Job{
+  id: ID!
+  type: JobType!
+  openings: Int!
+  details: String!
+  lastdate: String!
+}
+
+type Company{
+  id: ID!
+  name: String!
+  jobs: [Job]
+}
+
+input RegisterInput{
+  username: String!
+  password: String!
+  confirmPassword: String!
+  rollNo: String
+}
+
+input JobInput{
+  companyId: ID!
+  type: String!
+  openings: String!
+  details: String!
+  lastDate: String!
+}
+
+type Query{
+  getUsers: [Users]
+  getUser(userId: ID!): User
+}
+
+type Mutation{
+  register(registerInput: RegisterInput): User!
+  login(username: String!, password: String!): User!
+  addCompany(name: String): Company!
+  removeCompany(id: ID!): String!
+  addJob(jobInput: JobInput!): String!
+  removeJob(companyId: ID!, jobId: ID!): Company!
+}

@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
+import {lazy, Suspense} from 'react'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import {AbacProvider} from 'react-abac'
+import {useRecoilValue} from 'recoil'
+
+import {rules} from './services/abac'
+import {SESSION_STATE} from './store'
+import Loader from './components/loader'
+import PrivateRoute from './components/PrivateRoute'
 import './App.css';
+const Home = lazy(()  => import('./pages/Home'))
+const Login = lazy(() => import('./pages/Login')) 
 
 function App() {
+  const {role} = useRecoilValue(SESSION_STATE)
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AbacProvider rules={rules} roles={[role]}>
+      <Router>
+        <Suspense fallback={<Loader />}>
+          <Switch>
+            <Route path='/login' component={Login} />
+            <PrivateRoute component={Home} path='/' />
+          </Switch>
+        </Suspense>
+      </Router>
+    </AbacProvider>
   );
 }
 
