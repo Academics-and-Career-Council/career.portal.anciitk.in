@@ -10,12 +10,13 @@ import {useRecoilValue} from 'recoil'
 import {rules} from './services/abac'
 import {SESSION_STATE} from './store'
 import Loader from './components/loader'
-import PrivateRoute from './components/PrivateRoute'
 import './App.css';
-const Home = lazy(()  => import('./pages/Home'))
-const Login = lazy(() => import('./pages/Login')) 
-const Register = lazy(() => import('./pages/Register'))
-const Reset = lazy(() => import('./pages/Reset'))
+const Dashboard = lazy(() => import('./pages/Dashboard'))
+const Login = lazy(() => import('./pages/Login'))
+const Openings = lazy(() => import('./pages/Openings'))
+const Applications = lazy(() => import('./pages/Applications'))
+const Profile = lazy(() => import('./pages/Profile'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function App() {
   const {role} = useRecoilValue(SESSION_STATE)
@@ -25,10 +26,12 @@ function App() {
       <Router>
         <Suspense fallback={<Loader />}>
           <Switch>
-            <Route path='/login' component={Login} />
-            <Route path='/register' component={Register} />
-            <Route path='/reset' component={Reset} />
-            <PrivateRoute component={Home} path='/' />
+            <Route component={Dashboard} path='/dashboard' />
+            <Route component={Openings} path="/openings" />
+            <Route component={Applications} path="/applications" />
+            <Route component={Profile} path="/profile" />
+            <Route component={Login} path="/" exact/>
+            <Route component={NotFound} />
           </Switch>
         </Suspense>
       </Router>

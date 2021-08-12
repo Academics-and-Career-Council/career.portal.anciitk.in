@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/react-helmet": "^6.1.2",
     "antd": "^4.16.7",
+    "json-server": "^0.16.3",
     "react": "^17.0.2",
     "react-abac": "^0.0.7",
     "react-dom": "^17.0.2",
@@ -16,8 +17,6 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "recoil": "^0.3.1",
-    "relay-compiler-language-typescript": "^14.0.0",
-    "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
@@ -25,7 +24,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "server": "json-server --watch db.json --port 5000"
   },
   "eslintConfig": {
     "extends": [
@@ -55,6 +55,8 @@
     "@types/relay-runtime": "^11.0.1",
     "babel-plugin-relay": "^11.0.2",
     "graphql": "^15.5.1",
+    "typescript": "^4.1.2",
+    "relay-compiler-language-typescript": "^14.0.0",
     "relay-compiler": "^11.0.2",
     "relay-config": "^11.0.2"
   }

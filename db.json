@@ -1,0 +1,97 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "rollNo": 201075,
+      "name": "vaibhav goyal",
+      "email": "vgoyal20@iitk.ac.in",
+      "password": "Vaibhav@25",
+      "admin": true
+    },
+    {
+      "id": 2,
+      "rollNo": 201076,
+      "name": "Nikhol Rathore",
+      "email": "nikhil20@iitk.ac.in",
+      "password": "Vaibhav@25",
+      "admin": false
+    },
+    {
+      "id": 3,
+      "rollNo": 201077,
+      "name": "Sachin kumar",
+      "email": "sachin20@iitk.ac.in",
+      "password": "Vaibhav@25",
+      "admin": false
+    },
+    {
+      "id": 4,
+      "rollNo": 201078,
+      "name": "Harshal Mehta",
+      "email": "harshal20@iitk.ac.in",
+      "password": "Vaibhav@25",
+      "admin": false
+    }
+  ],
+  "companies": [
+    {
+      "id": "1",
+      "name": "Axis Bank",
+      "jobs": [
+        {
+          "id": 1,
+          "openings": 4,
+          "post": "Software developer"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Amazon",
+      "jobs": [
+        {
+          "id": 1,
+          "openings": 4,
+          "post": "Software developer"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Facebook",
+      "jobs": [
+        {
+          "id": 1,
+          "openings": 4,
+          "post": "Software developer"
+        }
+      ]
+    }
+  ],
+  "news": [
+    {
+      "title": "Job opening",
+      "date": "2 jan 2021"
+    },
+    {
+      "title": "Job opening",
+      "date": "2 jan 2021"
+    },
+    {
+      "title": "Job opening",
+      "date": "2 jan 2021"
+    },
+    {
+      "title": "Job opening",
+      "date": "2 jan 2021"
+    },
+    {
+      "title": "Job opening",
+      "date": "2 jan 2021"
+    },
+    {
+      "title": "Job opening",
+      "date": "2 jan 2021"
+    }
+  ]
+}
