@@ -25,10 +25,24 @@ const Wrapper = ({component}: {component: JSX.Element}) => {
     "CONTACT US",
     "CREADITS",
   ];
+  const pathsToKey: any = {
+    'dashboard': 1,
+    'profile': 2,
+    'openings': 3,
+    'applications': 4,
+    'calender': 5,
+    'stats': 6,
+    'contact': 7,
+    'credits': 8
+  }
   const [collapsed, setCollapsed] = useState(false);
   const [openmenu, setOpenmenu] = useState("1");
   const onCollapse = (collapsed: boolean) => setCollapsed(collapsed);
 
+  const path = window.location.pathname.split('/')[1];
+  console.log(path)
+  const key = pathsToKey[path].toString()
+  
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
@@ -44,7 +58,7 @@ const Wrapper = ({component}: {component: JSX.Element}) => {
       >
         <Menu
           theme="dark"
-          defaultSelectedKeys={["1"]}
+          defaultSelectedKeys={[key]}
           onSelect={(info) => setOpenmenu(info.key.toString())}
           style={{ position: "sticky", top: 0, left: 0 }}
         >
@@ -114,6 +128,7 @@ const Wrapper = ({component}: {component: JSX.Element}) => {
             marginTop: "",
             margin: "30px 30px 0 30px",
             backgroundColor: "#fff",
+            paddingBottom: "50px"
           }}
         >
           {component}
