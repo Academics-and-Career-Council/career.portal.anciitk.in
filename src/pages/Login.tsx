@@ -9,7 +9,7 @@ import "../styles/login.css";
 import { SESSION_STATE } from "../store";
 import logo from "../assets/img/logo192.png";
 
-const Login = (props: any) => {
+const Login: React.FC = (props: any) => {
   const setActive = useSetRecoilState(SESSION_STATE);
 
   const submitHandler = (values: any) => {

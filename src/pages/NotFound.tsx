@@ -1,12 +1,10 @@
 import { Link } from 'react-router-dom'
 
-const NotFound = () => {
-  return (
-    <div>
-      <h1>404 notFound.</h1>
-      <p>Back to - <Link to='/dashboard'>Home</Link></p>
-    </div>
-  )
-}
+const NotFound = () => (
+  <div>
+    <h1>404 notFound.</h1>
+    <p>Back to - <Link to='/dashboard'>Home</Link></p>
+  </div>
+)
 
 export default NotFound

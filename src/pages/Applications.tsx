@@ -3,7 +3,7 @@ import { Typography, Table } from "antd";
 import Wrapper from "../components/Wrapper";
 import Loader from "../components/loader";
 
-const Applications = () => {
+const Applications: React.FC = () => {
   const [applications, setApplications] = useState<Application[] | undefined>(
     undefined
   );
@@ -38,7 +38,7 @@ const Applications = () => {
       title: "RESUME",
       dataIndex: "resume",
       key: "resume",
-      render: (text: String) => <a href={`${text}`}>View</a>,
+      render: (text: String) => <a href={`${text}`} target='_blank' rel="noreferrer">View</a>,
     },
     {
       title: "STATUS",

@@ -30,7 +30,7 @@ const Dashboard: React.FC = () => {
   const jsx = (
     <div>
       <Title level={2} className="title">
-        News
+        Notifications
       </Title>
       {err ? (
         <div>{err}</div>

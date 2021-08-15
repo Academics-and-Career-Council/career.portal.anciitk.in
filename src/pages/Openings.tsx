@@ -4,7 +4,7 @@ import Wrapper from "../components/Wrapper";
 import Loader from "../components/loader";
 import "../styles/openings.css";
 
-const Openings = () => {
+const Openings: React.FC = () => {
   const [jobs, setJobs] = useState<Job[] | undefined>(undefined);
   const [err, setErr] = useState(undefined);
 
