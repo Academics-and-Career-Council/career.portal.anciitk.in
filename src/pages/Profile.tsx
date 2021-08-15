@@ -1,9 +1,13 @@
+import { Typography } from "antd"
 import Wrapper from "../components/Wrapper"
 
 const Profile = () => {
   const jsx = (
     <div>
-      Profile Page
+      <Typography.Title level={2} className='title'>
+        Profile
+      </Typography.Title>
+      
     </div>
   )
 

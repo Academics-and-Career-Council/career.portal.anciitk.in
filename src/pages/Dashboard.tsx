@@ -29,13 +29,18 @@ const Dashboard: React.FC = () => {
 
   const jsx = (
     <div>
-      <Title level={2} style={{ marginLeft: "10px" }}>
+      <Title level={2} className="title">
         News
       </Title>
-      {err && <div>{err}</div>}
-      <div className="newsList">
-        {newsArr !== undefined ? (
-          newsArr.length !== 0 ? (
+      {err ? (
+        <div>{err}</div>
+      ) : newsArr === undefined ? (
+        <Loader />
+      ) : (
+        <div className="newsList">
+          {newsArr.length === 0 ? (
+            <div>No Latest news to show.</div>
+          ) : (
             newsArr.map((news, index) => {
               return (
                 <div key={index} className="newsItem">
@@ -44,13 +49,9 @@ const Dashboard: React.FC = () => {
                 </div>
               );
             })
-          ) : (
-            <div>No Latest news to show.</div>
-          )
-        ) : (
-          <Loader />
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </div>
   );
 

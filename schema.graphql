@@ -1,55 +1,58 @@
-type User{
+type User {
   id: ID!
-  name: String!
-  email: String!
-  password: String!
   rollno: Int!
-  admin: Boolean!
-  token: String!
+  cpi: Float!
+  branch: String!
+  applications: [Application!]!
 }
 
-enum JobType{
-  Internal
-  External
-}
-
-type Job{
-  id: ID!
-  type: JobType!
-  openings: Int!
-  details: String!
-  lastdate: String!
-}
-
-type Company{
+type Job {
   id: ID!
   name: String!
-  jobs: [Job]
+  stipend: String!
+  jd: String!
+  nature_of_business: String!
+  designation: String!
+  location: String!
+  description: String!
+  eligibilty: String!
+  shortlist: String!
+  test: String!
+  status: String!
 }
 
-input RegisterInput{
-  username: String!
-  password: String!
-  confirmPassword: String!
-  rollNo: String
+type Application {
+  id: ID!
+  student: User!
+  job: Job!
+  status: String!
 }
 
-input JobInput{
-  companyId: ID!
-  type: String!
-  openings: String!
-  details: String!
-  lastDate: String!
+input ApplicationData {
+  studentId: String!
+  resume: String!
+  jobId: String!
 }
 
-type Query{
-  getUsers: [Users]
-  getUser(userId: ID!): User
+type Notification {
+  id: ID!
+  heading: String!
+  data: String!
 }
 
-type Mutation{
-  addCompany(name: String): Company!
-  removeCompany(id: ID!): String!
-  addJob(jobInput: JobInput!): String!
-  removeJob(companyId: ID!, jobId: ID!): Company!
+type Query {
+  getJobs: [Job!]!
+  getNotifications: [Notification!]!
+  getApplications(rollno: Int!): [Application!]!
+  getStatus: [Application!]!
+}
+
+type Response {
+  ok: Boolean!
+  message: String!
+}
+
+type Mutation {
+  applyJob(data: ApplicationData!): Job!
+  withdrawJob(data: ApplicationData!): Job!
 }

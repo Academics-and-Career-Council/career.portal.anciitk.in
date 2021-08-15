@@ -98,49 +98,75 @@
     {
       "companyName": "JP Morgan",
       "openingName": "SDE",
-      "deadline": "21 Aug 2021",
+      "deadline": "21 Aug 2021, 4:00 PM",
+      "status": "Waiting"
+    },
+    {
+      "companyName": "Amazon",
+      "openingName": "Software Engineer",
+      "deadline": "12 Aug 2021, 6:30 PM",
+      "status": "Waiting"
+    },
+    {
+      "companyName": "Limechat",
+      "openingName": "Data Science Intern",
+      "deadline": "21 Aug 2021, 4:00 PM",
+      "status": "Waiting"
+    },
+    {
+      "companyName": "Wells Fargo",
+      "openingName": "Intern",
+      "deadline": "25 Aug 2021, 6:00 PM",
+      "status": "Waiting"
+    },
+    {
+      "companyName": "Microsoft",
+      "openingName": "Software Developer Intern",
+      "deadline": "21 Aug 2021, 12:30 PM",
+      "status": "Waiting"
+    },
+    {
+      "companyName": "American Express",
+      "openingName": "Analytics Intern",
+      "deadline": "21 Aug 2021, 3:30 PM",
+      "status": "Waiting"
+    },
+    {
+      "companyName": "Axis Bank",
+      "openingName": "Consulting Intern",
+      "deadline": "21 Aug 2021, 4:30 PM",
       "status": "Waiting"
     },
     {
       "companyName": "JP Morgan",
       "openingName": "SDE",
-      "deadline": "21 Aug 2021",
+      "deadline": "21 Aug 2021, 4:30 PM",
+      "status": "Waiting"
+    }
+  ],
+  "applications": [
+    {
+      "name": "Amazon",
+      "designation": "SDE",
+      "resume": "https://novoresume.com/",
       "status": "Waiting"
     },
     {
-      "companyName": "JP Morgan",
-      "openingName": "SDE",
-      "deadline": "21 Aug 2021",
+      "name": "Microsoft",
+      "designation": "Software developer",
+      "resume": "https://novoresume.com/",
       "status": "Waiting"
     },
     {
-      "companyName": "JP Morgan",
-      "openingName": "SDE",
-      "deadline": "21 Aug 2021",
+      "name": "JP Morgan",
+      "designation": "Intern, Analytics",
+      "resume": "https://novoresume.com/",
       "status": "Waiting"
     },
     {
-      "companyName": "JP Morgan",
-      "openingName": "SDE",
-      "deadline": "21 Aug 2021",
-      "status": "Waiting"
-    },
-    {
-      "companyName": "JP Morgan",
-      "openingName": "SDE",
-      "deadline": "21 Aug 2021",
-      "status": "Waiting"
-    },
-    {
-      "companyName": "JP Morgan",
-      "openingName": "SDE",
-      "deadline": "21 Aug 2021",
-      "status": "Waiting"
-    },
-    {
-      "companyName": "JP Morgan",
-      "openingName": "SDE",
-      "deadline": "21 Aug 2021",
+      "name": "Limechat",
+      "designation": "Data Science",
+      "resume": "https://novoresume.com/",
       "status": "Waiting"
     }
   ]

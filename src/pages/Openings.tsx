@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Typography, Select, Button, Table } from "antd";
+import { Typography, Button, Table } from "antd";
 import Wrapper from "../components/Wrapper";
 import Loader from "../components/loader";
 import "../styles/openings.css";
@@ -40,21 +40,10 @@ const Openings = () => {
       key: "deadline",
     },
     {
-      title: "SELECT RESUME",
-      dataIndex: "resume",
-      key: "resume",
-      render: () => (
-        <Select defaultValue="resume 1">
-          <Select.Option value="resume 1">Resume 1</Select.Option>
-          <Select.Option value="resume 2">Resume 2</Select.Option>
-        </Select>
-      ),
-    },
-    {
       title: "ACTION",
       dataIndex: "action",
       key: "action",
-      render: () => <Button type="ghost">Withdraw</Button>,
+      render: () => <Button type="ghost">Apply</Button>,
     },
     {
       title: "STATUS",
@@ -65,7 +54,7 @@ const Openings = () => {
 
   const jsx = (
     <div>
-      <div style={{textAlign: "center", margin: "10px 0 30px 0"}}>
+      <div className="title">
         <Title level={2}>Job Openings</Title>
         <Text>These are the list of all the job openings.</Text>
       </div>
