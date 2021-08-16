@@ -80,13 +80,13 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
             <Link to="/applications">Your Applications</Link>
           </Menu.Item>
           <Menu.Item key="5" icon={<CalendarOutlined />}>
-            <Link to="/calender">Calender</Link>
+            <Link to="/calender">Calendar</Link>
           </Menu.Item>
           <Menu.Item key="6" icon={<RocketOutlined />}>
             <Link to="/stats">Stats</Link>
           </Menu.Item>
           <Menu.Item key="7" icon={<MessageOutlined />}>
-            <Link to="/contact">Contact Us</Link>
+            <a href="https://anciitk.in/contact.html" target="_blank" rel="noreferrer">Contact Us</a>
           </Menu.Item>
           <Menu.Item key="8" icon={<ProjectOutlined />}>
             <Link to="/credits">Credits</Link>
@@ -101,6 +101,7 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
               color: "white",
               margin: "auto 0",
               float: "left",
+              zIndex: 100
             }}
           >
             Welcome

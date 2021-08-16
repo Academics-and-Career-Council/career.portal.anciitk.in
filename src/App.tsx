@@ -17,6 +17,7 @@ const Openings = lazy(() => import('./pages/Openings'))
 const Applications = lazy(() => import('./pages/Applications'))
 const Profile = lazy(() => import('./pages/Profile'))
 const NotFound = lazy(() => import('./pages/NotFound'))
+const Calender = lazy(() => import('./pages/CalendarPage'))
 
 function App() {
   const {role} = useRecoilValue(SESSION_STATE)
@@ -30,6 +31,7 @@ function App() {
             <Route component={Openings} path="/openings" />
             <Route component={Applications} path="/applications" />
             <Route component={Profile} path="/profile" />
+            <Route component={Calender} path='/calender' />
             <Route component={Login} path="/" exact/>
             <Route component={NotFound} />
           </Switch>
