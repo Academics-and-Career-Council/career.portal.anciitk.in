@@ -8,7 +8,10 @@ import {
   Popconfirm,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+
 import Wrapper from "../components/Wrapper";
+import MobileWrapper from "../components/MobileWrapper";
+import { onMobile } from "../assets/settings";
 
 const Profile: React.FC = () => {
   const { Title } = Typography;
@@ -20,6 +23,7 @@ const Profile: React.FC = () => {
       <div
         style={{
           display: "flex",
+          flexDirection: onMobile ? 'column' : 'row',
           alignItems: "center",
           marginTop: "40px",
           justifyContent: "space-around",
@@ -43,7 +47,7 @@ const Profile: React.FC = () => {
               title="Are you sure remove this image?"
               okText="Yes"
               cancelText="No"
-              onConfirm={() => console.log('image removed')}
+              onConfirm={() => console.log("image removed")}
             >
               <Button>Remove Image</Button>
             </Popconfirm>
@@ -54,7 +58,7 @@ const Profile: React.FC = () => {
           title="User Info"
           bordered
           column={1}
-          style={{ width: "400px" }}
+          style={{ width: "400px", marginTop: onMobile ? "50px" : "0" }}
         >
           <Descriptions.Item label="Roll No">Vaibhav goyal</Descriptions.Item>
           <Descriptions.Item label="Branch">
@@ -66,7 +70,11 @@ const Profile: React.FC = () => {
     </div>
   );
 
-  return <Wrapper component={jsx} />;
+  return onMobile ? (
+    <MobileWrapper Component={jsx} />
+  ) : (
+    <Wrapper component={jsx} />
+  );
 };
 
 export default Profile;

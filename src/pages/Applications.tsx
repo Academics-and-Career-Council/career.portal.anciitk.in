@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { Typography, Table } from "antd";
+import { Typography, Table, Space } from "antd";
 import Wrapper from "../components/Wrapper";
 import Loader from "../components/loader";
+import MobileWrapper from "../components/MobileWrapper";
+import { onMobile } from "../assets/settings";
+import ApplicationCard from "../components/ApplicationCard";
 
 const Applications: React.FC = () => {
   const [applications, setApplications] = useState<Application[] | undefined>(
@@ -38,7 +41,11 @@ const Applications: React.FC = () => {
       title: "RESUME",
       dataIndex: "resume",
       key: "resume",
-      render: (text: String) => <a href={`${text}`} target='_blank' rel="noreferrer">View</a>,
+      render: (text: String) => (
+        <a href={`${text}`} target="_blank" rel="noreferrer">
+          View
+        </a>
+      ),
     },
     {
       title: "STATUS",
@@ -49,7 +56,7 @@ const Applications: React.FC = () => {
 
   const { Title, Text } = Typography;
   const jsx = (
-    <div>
+    <div style={{textAlign: 'center'}}>
       <div className="title">
         <Title level={2}>Your Applications</Title>
         <Text>These are the posts that you have applied for.</Text>
@@ -59,13 +66,23 @@ const Applications: React.FC = () => {
         <Text>{err}</Text>
       ) : applications === undefined ? (
         <Loader />
+      ) : onMobile ? (
+        <Space direction='vertical' size='large'>
+          {applications.map((application, index) => (
+            <ApplicationCard key={index} application={application} />
+          ))}
+        </Space>
       ) : (
         <Table columns={columns} dataSource={applications} pagination={false} />
       )}
     </div>
   );
 
-  return <Wrapper component={jsx} />;
+  return onMobile ? (
+    <MobileWrapper Component={jsx} />
+  ) : (
+    <Wrapper component={jsx} />
+  );
 };
 
 export default Applications;

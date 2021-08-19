@@ -1,0 +1,1 @@
+export const onMobile = window.screen.width < 600

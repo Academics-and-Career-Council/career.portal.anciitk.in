@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Layout, Typography, Menu, Space, Button } from "antd";
+import { Layout, Typography, Menu, Space, Button, BackTop } from "antd";
 import { Link } from "react-router-dom";
 import {
   DashboardOutlined,
@@ -10,6 +10,7 @@ import {
   MessageOutlined,
   RocketOutlined,
   ProjectOutlined,
+  UpCircleOutlined,
 } from "@ant-design/icons";
 import "../styles/wrapper.css";
 
@@ -26,7 +27,7 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
     contact: 7,
     credits: 8,
   };
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const onCollapse = (collapsed: boolean) => setCollapsed(collapsed);
 
   const path = window.location.pathname.split("/")[1];
@@ -35,6 +36,7 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider
+        breakpoint="lg"
         collapsible
         collapsed={collapsed}
         onCollapse={onCollapse}
@@ -86,7 +88,13 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
             <Link to="/stats">Stats</Link>
           </Menu.Item>
           <Menu.Item key="7" icon={<MessageOutlined />}>
-            <a href="https://anciitk.in/contact.html" target="_blank" rel="noreferrer">Contact Us</a>
+            <a
+              href="https://anciitk.in/contact.html"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Contact Us
+            </a>
           </Menu.Item>
           <Menu.Item key="8" icon={<ProjectOutlined />}>
             <Link to="/credits">Credits</Link>
@@ -101,25 +109,33 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
               color: "white",
               margin: "auto 0",
               float: "left",
-              zIndex: 100
+              zIndex: 100,
             }}
           >
             Welcome
           </Typography.Title>
           <Space>
-            <Button type='ghost' style={{color: "white"}}>Change Password</Button>
-            <Button type='ghost'style={{color: "white"}}>Logout</Button>
+            <Button type="ghost" style={{ color: "white" }}>
+              Change Password
+            </Button>
+            <Button type="ghost" style={{ color: "white" }}>
+              Logout
+            </Button>
           </Space>
         </Header>
         <Content
           style={{
-            marginTop: "",
             margin: "30px 30px 0 30px",
             backgroundColor: "#fff",
             paddingBottom: "50px",
           }}
         >
           {component}
+          <BackTop>
+            <div className="backTop">
+              <UpCircleOutlined />
+            </div>
+          </BackTop>
         </Content>
         <Footer style={{ textAlign: "center" }}>
           Made with <span style={{ color: "#e25555" }}>&#9829;</span> by AnC

@@ -1,4 +1,4 @@
-const Home: React.FC = () => {
+const Landing: React.FC = () => {
   return (
     <div>
       Home page.
@@ -6,4 +6,4 @@ const Home: React.FC = () => {
   )
 }
 
-export default Home
+export default Landing

@@ -5,6 +5,8 @@ import { secured } from "react-abac";
 
 import Wrapper from "../components/Wrapper";
 import Loader from "../components/loader";
+import { onMobile } from "../assets/settings";
+import MobileWrapper from "../components/MobileWrapper";
 import "../styles/dashboard.css";
 
 const Dashboard: React.FC = () => {
@@ -55,7 +57,7 @@ const Dashboard: React.FC = () => {
     </div>
   );
 
-  return <Wrapper component={jsx} />;
+  return onMobile ? <MobileWrapper Component={jsx} /> : <Wrapper component={jsx} />;
 };
 
 export default secured({

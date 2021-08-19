@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Calendar, Typography, Badge, Popover, Space } from "antd";
 import { Moment } from "moment";
+
 import Wrapper from "../components/Wrapper";
+import MobileWrapper from "../components/MobileWrapper";
+import { onMobile } from "../assets/settings";
 
 const CalendarPage = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -61,7 +64,11 @@ const CalendarPage = () => {
     </div>
   );
 
-  return <Wrapper component={jsx} />;
+  return onMobile ? (
+    <MobileWrapper Component={jsx} />
+  ) : (
+    <Wrapper component={jsx} />
+  );
 };
 
 export default CalendarPage;

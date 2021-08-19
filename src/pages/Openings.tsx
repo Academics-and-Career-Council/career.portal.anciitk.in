@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import { Typography, Button, Table } from "antd";
+import { Typography, Button, Table, Space } from "antd";
+
 import Wrapper from "../components/Wrapper";
+import MobileWrapper from "../components/MobileWrapper";
 import Loader from "../components/loader";
+import { onMobile } from "../assets/settings";
 import "../styles/openings.css";
+import OpeningCard from "../components/OpeningCard";
 
 const Openings: React.FC = () => {
   const [jobs, setJobs] = useState<Job[] | undefined>(undefined);
@@ -53,7 +57,7 @@ const Openings: React.FC = () => {
   ];
 
   const jsx = (
-    <div>
+    <div style={{textAlign: 'center'}}>
       <div className="title">
         <Title level={2}>Job Openings</Title>
         <Text>These are the list of all the job openings.</Text>
@@ -62,13 +66,23 @@ const Openings: React.FC = () => {
         <Text>{err}</Text>
       ) : jobs === undefined ? (
         <Loader />
+      ) : onMobile ? (
+        <Space direction='vertical' size='large'>
+          {jobs.map((job, index) => (
+            <OpeningCard key={index} job={job} />
+          ))}
+        </Space>
       ) : (
         <Table columns={columns} dataSource={jobs} pagination={false} />
       )}
     </div>
   );
 
-  return <Wrapper component={jsx} />;
+  return onMobile ? (
+    <MobileWrapper Component={jsx} />
+  ) : (
+    <Wrapper component={jsx} />
+  );
 };
 
 export default Openings;
