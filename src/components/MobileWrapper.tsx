@@ -1,6 +1,6 @@
 import { Layout, BackTop } from "antd";
 import {UpCircleOutlined} from '@ant-design/icons'
-import Navbar from "./Navbar";
+import DashboardNavbar from "./DashboardNavbar";
 import '../styles/wrapper.css'
 
 const { Header, Content, Footer } = Layout;
@@ -9,7 +9,7 @@ const MobileWrapper = ({ Component }: { Component: JSX.Element }) => {
   return (
     <Layout style={{ minHeight: "100vh", backgroundColor: '#fff' }}>
       <Header className='header'>
-        <Navbar />
+        <DashboardNavbar />
       </Header>
       <Content
         style={{

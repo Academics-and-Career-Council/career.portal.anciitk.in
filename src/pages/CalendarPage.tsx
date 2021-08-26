@@ -6,7 +6,7 @@ import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
 import { onMobile } from "../assets/settings";
 
-const CalendarPage = () => {
+const CalendarPage: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [err, setErr] = useState(undefined);
 

@@ -1,31 +1,42 @@
 import { useState, useEffect } from "react";
-import { Typography, Button, Table, Space } from "antd";
+import { Link } from "react-router-dom";
+import { Typography, Button, Table, Space, notification } from "antd";
 
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
 import Loader from "../components/loader";
-import { onMobile } from "../assets/settings";
-import "../styles/openings.css";
 import OpeningCard from "../components/OpeningCard";
+import ApplicationModal from "../components/ApplicationModal";
+import { onMobile } from "../assets/settings";
+import { fetchData } from "../services/fetch";
+import "../styles/openings.css";
+
+const { Title, Text } = Typography;
+
+const openNotification = () => {
+  notification["info"]({
+    message: "View Job Details",
+    description: "Click on the Opening Name to view the complete Job Details.",
+    duration: 3,
+  });
+};
 
 const Openings: React.FC = () => {
-  const [jobs, setJobs] = useState<Job[] | undefined>(undefined);
-  const [err, setErr] = useState(undefined);
+  const [jobs, setJobs] = useState<Job[]>();
+  const [err, setErr] = useState<string>();
+  const [visible, setVisible] = useState(false);
+  const [modalJob, setModalJob] = useState<Job>()
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:5000/jobs");
-      return res.json();
-    };
-
-    fetchData()
+    fetchData("http://localhost:5000/jobs")
       .then((data: Job[]) => setJobs(data))
       .catch((err) => {
         console.error(err);
         setErr(err.message);
       });
+
+    setTimeout(openNotification, 10000);
   }, []);
-  const { Title, Text } = Typography;
 
   const columns = [
     {
@@ -37,6 +48,9 @@ const Openings: React.FC = () => {
       title: "OPENING NAME",
       dataIndex: "openingName",
       key: "openingName",
+      render: (name: String, record: Job) => (
+        <Link to={`/openings/${record.id}`}>{name}</Link>
+      ),
     },
     {
       title: "APPLICATION DEADLINE",
@@ -47,7 +61,11 @@ const Openings: React.FC = () => {
       title: "ACTION",
       dataIndex: "action",
       key: "action",
-      render: () => <Button type="ghost">Apply</Button>,
+      render: (_: string, record: Job) => (
+        <Button type="ghost" onClick={() => {setVisible(true); setModalJob(record)}}>
+          Apply
+        </Button>
+      ),
     },
     {
       title: "STATUS",
@@ -57,7 +75,7 @@ const Openings: React.FC = () => {
   ];
 
   const jsx = (
-    <div style={{textAlign: 'center'}}>
+    <div style={{ textAlign: "center" }}>
       <div className="title">
         <Title level={2}>Job Openings</Title>
         <Text>These are the list of all the job openings.</Text>
@@ -67,7 +85,7 @@ const Openings: React.FC = () => {
       ) : jobs === undefined ? (
         <Loader />
       ) : onMobile ? (
-        <Space direction='vertical' size='large'>
+        <Space direction="vertical" size="large">
           {jobs.map((job, index) => (
             <OpeningCard key={index} job={job} />
           ))}
@@ -78,10 +96,15 @@ const Openings: React.FC = () => {
     </div>
   );
 
-  return onMobile ? (
-    <MobileWrapper Component={jsx} />
-  ) : (
-    <Wrapper component={jsx} />
+  return (
+    <>
+      {onMobile ? (
+        <MobileWrapper Component={jsx} />
+      ) : (
+        <Wrapper component={jsx} />
+      )}
+      <ApplicationModal visible={visible} setVisible={setVisible} job={modalJob} />
+    </>
   );
 };
 
