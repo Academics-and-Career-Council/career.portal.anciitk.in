@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Calendar, Typography, Badge, Popover, Space } from "antd";
 import { Moment } from "moment";
+import { MobileView, BrowserView } from "react-device-detect";
 
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
-import { onMobile } from "../assets/settings";
 
 const CalendarPage: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
@@ -64,10 +64,15 @@ const CalendarPage: React.FC = () => {
     </div>
   );
 
-  return onMobile ? (
-    <MobileWrapper Component={jsx} />
-  ) : (
-    <Wrapper component={jsx} />
+  return (
+    <>
+      <MobileView>
+        <MobileWrapper Component={jsx} />
+      </MobileView>
+      <BrowserView>
+        <Wrapper component={jsx} />
+      </BrowserView>
+    </>
   );
 };
 

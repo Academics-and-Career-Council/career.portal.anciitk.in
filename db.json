@@ -128,6 +128,13 @@
       "designation": "Intern",
       "resume": "",
       "status": "Waiting"
+    },
+    {
+      "id": "5d7ba497-4214-464c-a6d6-c364acf214d8",
+      "name": "Amazon",
+      "designation": "Software Engineer",
+      "resume": "acvd",
+      "status": "Waiting"
     }
   ]
 }

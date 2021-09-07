@@ -18,7 +18,7 @@ const ApplicationModal = ({
   const submitApplication = () => {
     if (resumeLink === "") {
       setErr("Please enter a value in resume input.");
-      setTimeout(() => setErr(''), 2000)
+      setTimeout(() => setErr(""), 2000);
       return;
     }
 

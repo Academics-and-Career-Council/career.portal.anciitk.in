@@ -8,22 +8,26 @@ import {
   Popconfirm,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
+import { MobileView, BrowserView, isMobile } from "react-device-detect";
 
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
-import { onMobile } from "../assets/settings";
+import { Helmet } from "react-helmet";
 
 const Profile: React.FC = () => {
   const { Title } = Typography;
   const jsx = (
     <div>
+      <Helmet>
+        <title>Career Portal | Profile</title>
+      </Helmet>
       <Title level={2} className="title">
         Profile
       </Title>
       <div
         style={{
           display: "flex",
-          flexDirection: onMobile ? 'column' : 'row',
+          flexDirection: isMobile ? "column" : "row",
           alignItems: "center",
           marginTop: "40px",
           justifyContent: "space-around",
@@ -58,7 +62,7 @@ const Profile: React.FC = () => {
           title="User Info"
           bordered
           column={1}
-          style={{ width: "400px", marginTop: onMobile ? "50px" : "0" }}
+          style={{ width: "400px", marginTop: isMobile ? "50px" : "0" }}
         >
           <Descriptions.Item label="Roll No">Vaibhav goyal</Descriptions.Item>
           <Descriptions.Item label="Branch">
@@ -70,10 +74,15 @@ const Profile: React.FC = () => {
     </div>
   );
 
-  return onMobile ? (
-    <MobileWrapper Component={jsx} />
-  ) : (
-    <Wrapper component={jsx} />
+  return (
+    <>
+      <MobileView>
+        <MobileWrapper Component={jsx} />
+      </MobileView>
+      <BrowserView>
+        <Wrapper component={jsx} />
+      </BrowserView>
+    </>
   );
 };
 

@@ -1,33 +1,33 @@
-import React from 'react'
-import {Route, RouteComponentProps, Redirect} from 'react-router-dom'
-import {useRecoilValue} from 'recoil'
+import React from "react";
+import { Route, RouteComponentProps, Redirect } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 
-import {SESSION_STATE} from '../store'
-
-const {Fragment} = React
+import { SESSION_STATE } from "../store";
+const { Fragment } = React;
 
 const PrivateRoute = (props: {
-  component: React.ComponentType<RouteComponentProps>,
-  path: string
+  component: React.FC<RouteComponentProps>;
+  path: string;
 }) => {
-  const { active } = useRecoilValue(SESSION_STATE)
-  const {component: Component, path, ...rest} = props
+  const session = useRecoilValue(SESSION_STATE);
+  const { component: Component, path, ...rest } = props;
+  const pathname = window.location.pathname.substring(1);
 
   return (
     <Fragment>
-      <Route 
+      <Route
         {...rest}
         path={path}
         render={(props) => {
-          return active ? (
+          return session.active ? (
             <Component {...props} />
           ) : (
-            <Redirect to={{pathname: "/login"}} />
-          )
+            <Redirect to={`/verify?next=${pathname}`} />
+          );
         }}
       />
     </Fragment>
-  )
-}
+  );
+};
 
-export default PrivateRoute
+export default PrivateRoute;

@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Typography, Button, Table, Space, notification } from "antd";
+import { Helmet } from "react-helmet";
+import { BrowserView, MobileView, isMobile } from "react-device-detect";
 
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
 import Loader from "../components/loader";
 import OpeningCard from "../components/OpeningCard";
 import ApplicationModal from "../components/ApplicationModal";
-import { onMobile } from "../assets/settings";
 import { fetchData } from "../services/fetch";
 import "../styles/openings.css";
 
@@ -25,7 +26,7 @@ const Openings: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>();
   const [err, setErr] = useState<string>();
   const [visible, setVisible] = useState(false);
-  const [modalJob, setModalJob] = useState<Job>()
+  const [modalJob, setModalJob] = useState<Job>();
 
   useEffect(() => {
     fetchData("http://localhost:5000/jobs")
@@ -62,7 +63,13 @@ const Openings: React.FC = () => {
       dataIndex: "action",
       key: "action",
       render: (_: string, record: Job) => (
-        <Button type="ghost" onClick={() => {setVisible(true); setModalJob(record)}}>
+        <Button
+          type="ghost"
+          onClick={() => {
+            setVisible(true);
+            setModalJob(record);
+          }}
+        >
           Apply
         </Button>
       ),
@@ -76,6 +83,9 @@ const Openings: React.FC = () => {
 
   const jsx = (
     <div style={{ textAlign: "center" }}>
+      <Helmet>
+        <title>Career Portal | Job Openings</title>
+      </Helmet>
       <div className="title">
         <Title level={2}>Job Openings</Title>
         <Text>These are the list of all the job openings.</Text>
@@ -84,7 +94,7 @@ const Openings: React.FC = () => {
         <Text>{err}</Text>
       ) : jobs === undefined ? (
         <Loader />
-      ) : onMobile ? (
+      ) : isMobile ? (
         <Space direction="vertical" size="large">
           {jobs.map((job, index) => (
             <OpeningCard key={index} job={job} />
@@ -98,12 +108,17 @@ const Openings: React.FC = () => {
 
   return (
     <>
-      {onMobile ? (
+      <MobileView>
         <MobileWrapper Component={jsx} />
-      ) : (
+      </MobileView>
+      <BrowserView>
         <Wrapper component={jsx} />
-      )}
-      <ApplicationModal visible={visible} setVisible={setVisible} job={modalJob} />
+      </BrowserView>
+      <ApplicationModal
+        visible={visible}
+        setVisible={setVisible}
+        job={modalJob}
+      />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Drawer, Menu } from "antd";
+import { Drawer, Menu, Button } from "antd";
 import {
   DashboardOutlined,
   UserOutlined,
@@ -8,19 +8,23 @@ import {
   CalendarOutlined,
   CarryOutOutlined,
   MessageOutlined,
-  RocketOutlined,
-  ProjectOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
+import { useRecoilState } from "recoil";
+import { SESSION_STATE } from "../store";
+import logout from "../services/logout";
 
 const DashboardNavbar = () => {
   const [visible, setVisible] = useState(false);
+  const [{ logoutUrl }, setSession] = useRecoilState(SESSION_STATE);
 
   return (
     <>
       <Menu mode="horizontal" theme="dark">
         <Menu.Item icon={<MenuOutlined />} onClick={() => setVisible(true)} />
-        <Menu.Item>Logout</Menu.Item>
+        <Menu.Item>
+          <Button onClick={() => logout(logoutUrl, setSession)}>Logout</Button>
+        </Menu.Item>
       </Menu>
       <Drawer
         title="Student Dashboard"
@@ -45,9 +49,6 @@ const DashboardNavbar = () => {
           <Menu.Item key="5" icon={<CalendarOutlined />}>
             <Link to="/calender">Calendar</Link>
           </Menu.Item>
-          <Menu.Item key="6" icon={<RocketOutlined />}>
-            <Link to="/stats">Stats</Link>
-          </Menu.Item>
           <Menu.Item key="7" icon={<MessageOutlined />}>
             <a
               href="https://anciitk.in/contact.html"
@@ -56,9 +57,6 @@ const DashboardNavbar = () => {
             >
               Contact Us
             </a>
-          </Menu.Item>
-          <Menu.Item key="8" icon={<ProjectOutlined />}>
-            <Link to="/credits">Credits</Link>
           </Menu.Item>
         </Menu>
       </Drawer>

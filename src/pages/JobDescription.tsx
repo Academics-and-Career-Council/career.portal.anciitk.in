@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router";
 import { Typography, Descriptions } from "antd";
+import { Helmet } from "react-helmet";
+import { BrowserView, MobileView } from "react-device-detect";
 
 import Loader from "../components/loader";
-import { onMobile } from "../assets/settings";
 import MobileWrapper from "../components/MobileWrapper";
 import Wrapper from "../components/Wrapper";
+import { fetchData } from "../services/fetch";
 
 const JobDescription: React.FC<
   RouteComponentProps<{ id: string | undefined }>
@@ -14,12 +16,7 @@ const JobDescription: React.FC<
   const [err, setErr] = useState(undefined);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch(`http://localhost:5000/jobs/${params?.id}`);
-      return res.json();
-    };
-
-    fetchData()
+    fetchData(`http://localhost:5000/jobs/${params?.id}`)
       .then((data: Job) => setJob(data))
       .catch((err) => {
         console.error(err);
@@ -31,6 +28,9 @@ const JobDescription: React.FC<
   const { Item } = Descriptions;
   const jsx = (
     <div style={{ textAlign: "center" }}>
+      <Helmet>
+        <title>Career Portal | Jobs</title>
+      </Helmet>
       <div className="title">
         <Title level={2}>Job Details</Title>
       </div>
@@ -42,30 +42,37 @@ const JobDescription: React.FC<
         <Descriptions
           column={2}
           bordered
-          style={{ width: "80%", textAlign: 'center', margin: "0 auto" }}
+          style={{ width: "80%", textAlign: "center", margin: "0 auto" }}
           labelStyle={{
             backgroundColor: "#555454",
             color: "white",
             fontWeight: "bolder",
             width: "200px",
           }}
-          contentStyle={{fontSize: 'large'}}
+          contentStyle={{ fontSize: "large" }}
         >
           <Item label="Company Name">{job.companyName}</Item>
           <Item label="Designation">{job.openingName}</Item>
           <Item label="Job Location">{job.location}</Item>
           <Item label="Stipend">{job.stipend}</Item>
-          <Item label="Job Description" span={2} >{job.description}</Item>
+          <Item label="Job Description" span={2}>
+            {job.description}
+          </Item>
           <Item label="Eligiblity Criterion">{job.eligiblity}</Item>
         </Descriptions>
       )}
     </div>
   );
 
-  return onMobile ? (
-    <MobileWrapper Component={jsx} />
-  ) : (
-    <Wrapper component={jsx} />
+  return (
+    <>
+      <MobileView>
+        <MobileWrapper Component={jsx} />
+      </MobileView>
+      <BrowserView>
+        <Wrapper component={jsx} />
+      </BrowserView>
+    </>
   );
 };
 

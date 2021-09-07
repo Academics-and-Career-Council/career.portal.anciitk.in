@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Drawer, Button, Typography, Space, Popover } from "antd";
 import { blue } from "@ant-design/colors";
-import { FacebookFilled, LinkedinFilled, MenuOutlined } from "@ant-design/icons";
-import { useRecoilValue } from "recoil";
-import { SCREEN_STATE } from "../store";
+import {
+  FacebookFilled,
+  LinkedinFilled,
+  MenuOutlined,
+} from "@ant-design/icons";
+import { isMobile } from "react-device-detect";
 
 const Navbar = () => {
-  const { onMobile } = useRecoilValue(SCREEN_STATE);
   const [visible, setVisible] = useState(true);
 
   const { Text, Title } = Typography;
@@ -24,7 +26,7 @@ const Navbar = () => {
         ACADEMIC AND CAREER COUNCIL
       </Title>
 
-      {onMobile ? (
+      {isMobile ? (
         <div>
           <MenuOutlined />
         </div>
@@ -67,7 +69,7 @@ const Navbar = () => {
         closable={true}
         visible={visible}
         onClose={() => setVisible(false)}
-        style={{ display: onMobile ? "inherit" : "none" }}
+        style={{ display: isMobile ? "inherit" : "none" }}
       >
         <Space align="center" size="large" direction="vertical">
           <Popover

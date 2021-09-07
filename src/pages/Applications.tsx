@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Typography, Table, Space } from "antd";
+import { Helmet } from "react-helmet";
+import { MobileView, BrowserView, isMobile } from "react-device-detect";
+
 import Wrapper from "../components/Wrapper";
 import Loader from "../components/loader";
 import MobileWrapper from "../components/MobileWrapper";
-import { onMobile } from "../assets/settings";
 import ApplicationCard from "../components/ApplicationCard";
 
 const Applications: React.FC = () => {
@@ -56,7 +58,10 @@ const Applications: React.FC = () => {
 
   const { Title, Text } = Typography;
   const jsx = (
-    <div style={{textAlign: 'center'}}>
+    <div style={{ textAlign: "center" }}>
+      <Helmet>
+        <title>Career Portal | Job Applications</title>
+      </Helmet>
       <div className="title">
         <Title level={2}>Your Applications</Title>
         <Text>These are the posts that you have applied for.</Text>
@@ -66,8 +71,8 @@ const Applications: React.FC = () => {
         <Text>{err}</Text>
       ) : applications === undefined ? (
         <Loader />
-      ) : onMobile ? (
-        <Space direction='vertical' size='large'>
+      ) : isMobile ? (
+        <Space direction="vertical" size="large">
           {applications.map((application, index) => (
             <ApplicationCard key={index} application={application} />
           ))}
@@ -78,10 +83,15 @@ const Applications: React.FC = () => {
     </div>
   );
 
-  return onMobile ? (
-    <MobileWrapper Component={jsx} />
-  ) : (
-    <Wrapper component={jsx} />
+  return (
+    <>
+      <MobileView>
+        <MobileWrapper Component={jsx} />
+      </MobileView>
+      <BrowserView>
+        <Wrapper component={jsx} />
+      </BrowserView>
+    </>
   );
 };
 

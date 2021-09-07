@@ -1,37 +1,56 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { AbacProvider } from "react-abac";
-import { useRecoilValue } from "recoil";
-
-import { rules } from "./services/abac";
-import { SESSION_STATE } from "./store";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard";
-import Landing from "./pages/Landing";
 import Openings from "./pages/Openings";
 import Applications from "./pages/Applications";
 import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import CalendarPage from "./pages/CalendarPage";
-import "./App.css";
 import JobDescription from "./pages/JobDescription";
+import Verify from "./pages/Verify";
+import "./App.css";
 
 function App() {
-  const { role } = useRecoilValue(SESSION_STATE);
-
   return (
-    <AbacProvider rules={rules} roles={[role]}>
-      <Router>
-        <Switch>
-          <Route component={Dashboard} path="/dashboard" />
-          <Route component={JobDescription} path='/openings/:id' />
-          <Route component={Openings} path="/openings" />
-          <Route component={Applications} path="/applications" />
-          <Route component={Profile} path="/profile" />
-          <Route component={CalendarPage} path="/calender" />
-          <Route component={Landing} path="/" exact />
-          <Route component={NotFound} />
-        </Switch>
-      </Router>
-    </AbacProvider>
+    <Router>
+      <Switch>
+        <PrivateRoute
+          component={Dashboard}
+          path="/dashboard"
+        />
+        <PrivateRoute
+          // @ts-ignore
+          component={JobDescription}
+          path="/openings/:id"
+        />
+        <PrivateRoute
+          component={Openings}
+          path="/openings"
+        />
+        <PrivateRoute
+          component={Applications}
+          path="/applications"
+        />
+        <PrivateRoute
+          component={Profile}
+          path="/profile"
+        />
+        <PrivateRoute
+          component={CalendarPage}
+          path="/calender"
+        />
+        <Route path="/verify" component={Verify} />
+        <Route path="/" exact>
+          <Redirect to="/dashboard" />
+        </Route>
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
   );
 }
 

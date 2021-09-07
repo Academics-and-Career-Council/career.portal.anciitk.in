@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Result, Typography } from "antd";
-import { permissions } from "../services/abac";
-import { secured } from "react-abac";
+import { Typography } from "antd";
+import { Helmet } from "react-helmet";
+import { MobileView, BrowserView } from "react-device-detect";
 
 import Wrapper from "../components/Wrapper";
 import Loader from "../components/loader";
-import { onMobile } from "../assets/settings";
 import MobileWrapper from "../components/MobileWrapper";
+import { fetchData } from "../services/fetch";
 import "../styles/dashboard.css";
 
 const Dashboard: React.FC = () => {
@@ -14,12 +14,7 @@ const Dashboard: React.FC = () => {
   const [err, setErr] = useState(undefined);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:5000/news");
-      return res.json();
-    };
-
-    fetchData()
+    fetchData("http://localhost:5000/news")
       .then((data: News[]) => setNewsArr(data))
       .catch((err) => {
         console.log(err);
@@ -31,6 +26,9 @@ const Dashboard: React.FC = () => {
 
   const jsx = (
     <div>
+      <Helmet>
+        <title>Career Portal | Dashboard</title>
+      </Helmet>
       <Title level={2} className="title">
         Notifications
       </Title>
@@ -57,11 +55,16 @@ const Dashboard: React.FC = () => {
     </div>
   );
 
-  return onMobile ? <MobileWrapper Component={jsx} /> : <Wrapper component={jsx} />;
+  return (
+    <>
+      <MobileView>
+        <MobileWrapper Component={jsx} />
+      </MobileView>
+      <BrowserView>
+        <Wrapper component={jsx} />
+      </BrowserView>
+    </>
+  );
 };
 
-export default secured({
-  permissions: permissions.ELEVATE_USER,
-  mapPropsToData: (props) => props,
-  noAccess: () => <Result status="403" title="Unauthorized Access"></Result>,
-})(Dashboard);
+export default Dashboard;

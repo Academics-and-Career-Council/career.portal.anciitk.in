@@ -1,1 +1,2 @@
-export const onMobile = window.screen.width < 600
+export const loginUrl = 'http://localhost:3001/login'
+export const kratosBase = 'http://localhost:4433'
