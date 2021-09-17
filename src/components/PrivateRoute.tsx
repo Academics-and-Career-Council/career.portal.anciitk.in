@@ -22,7 +22,7 @@ const PrivateRoute = (props: {
           return session.active ? (
             <Component {...props} />
           ) : (
-            <Redirect to={`/verify?next=${pathname}`} />
+            <Redirect to={`/verify?return_to=${pathname}`} />
           );
         }}
       />

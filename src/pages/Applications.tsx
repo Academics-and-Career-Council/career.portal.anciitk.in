@@ -7,6 +7,7 @@ import Wrapper from "../components/Wrapper";
 import Loader from "../components/loader";
 import MobileWrapper from "../components/MobileWrapper";
 import ApplicationCard from "../components/ApplicationCard";
+import { fetchData } from "../services/fetch";
 
 const Applications: React.FC = () => {
   const [applications, setApplications] = useState<Application[] | undefined>(
@@ -15,12 +16,7 @@ const Applications: React.FC = () => {
   const [err, setErr] = useState(undefined);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:5000/applications");
-      return res.json();
-    };
-
-    fetchData()
+    fetchData("http://localhost:5000/applications")
       .then((data: Application[]) => setApplications(data))
       .catch((err) => {
         console.error(err);

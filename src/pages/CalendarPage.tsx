@@ -5,18 +5,14 @@ import { MobileView, BrowserView } from "react-device-detect";
 
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
+import { fetchData } from "../services/fetch";
 
 const CalendarPage: React.FC = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [err, setErr] = useState(undefined);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:5000/jobs");
-      return res.json();
-    };
-
-    fetchData()
+    fetchData("http://localhost:5000/jobs")
       .then((data: Job[]) => setJobs(data))
       .catch((err) => {
         console.error(err);

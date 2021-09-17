@@ -14,7 +14,7 @@ const Verify: React.FC<RouteComponentProps> = ({ history }) => {
   const [err, setErr] = useState<AxiosError>();
 
   const query = new URLSearchParams(useLocation().search);
-  const path = query.get("next");
+  const path = query.get("return_to");
 
   useEffect(() => {
     ory
@@ -38,7 +38,7 @@ const Verify: React.FC<RouteComponentProps> = ({ history }) => {
         switch (err.response?.status) {
           case 403:
           case 401:
-            window.location.href = `${loginUrl}?next=${path}`;
+            window.location.href = `${loginUrl}?return_to=http://localhost:3000/${path}`;
             return;
         }
         setErr(err);
