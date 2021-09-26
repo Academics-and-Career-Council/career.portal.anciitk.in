@@ -1,8 +1,7 @@
 import axios from "axios";
-import { kratosBase } from "../assets/settings";
 
 const instance = axios.create({
-  baseURL: kratosBase,
+  baseURL: process.env.REACT_APP_KRATOS_BASE,
   withCredentials: true,
 });
 

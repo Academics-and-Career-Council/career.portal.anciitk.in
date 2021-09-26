@@ -7,14 +7,13 @@ import { Result, Button } from "antd";
 import { ory } from "../services/kratos";
 import { SESSION_STATE } from "../store";
 import Loader from "../components/loader";
-import { loginUrl } from "../assets/settings";
 
 const Verify: React.FC<RouteComponentProps> = ({ history }) => {
   const setSession = useSetRecoilState(SESSION_STATE);
   const [err, setErr] = useState<AxiosError>();
 
   const query = new URLSearchParams(useLocation().search);
-  const path = query.get("return_to");
+  const path = query.get("next");
 
   useEffect(() => {
     ory
@@ -38,7 +37,7 @@ const Verify: React.FC<RouteComponentProps> = ({ history }) => {
         switch (err.response?.status) {
           case 403:
           case 401:
-            window.location.href = `${loginUrl}?return_to=http://localhost:3000/${path}`;
+            window.location.href = `${process.env.REACT_APP_LOGIN_URL}?return_to=${process.env.REACT_APP_BASE_URL}/${path}`;
             return;
         }
         setErr(err);
@@ -54,7 +53,7 @@ const Verify: React.FC<RouteComponentProps> = ({ history }) => {
           title={err.message + "!"}
           subTitle={`${err.response?.status} ${err.response?.statusText}`}
           extra={[
-            <a href={loginUrl}>
+            <a href={process.env.REACT_APP_LOGIN_URL}>
               <Button type="primary">Go to Login</Button>
             </a>,
           ]}
