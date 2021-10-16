@@ -1,7 +1,9 @@
-import { Button, Modal, Input, Typography, message, Space, Alert } from "antd";
+import type { ApplicationData } from "../__generated__/ApplyJobMutation.graphql";
+import { Button, Modal, Input, Typography, Space, Alert } from "antd";
 import { Dispatch, SetStateAction, useState } from "react";
-import { v4 as uuidV4 } from "uuid";
-import { postData } from "../services/fetch";
+import ApplyJob from "../actions/ApplyJob";
+import WithdrawJob from "../actions/WithdrawJob";
+import { useRelayEnvironment } from "react-relay";
 
 const ApplicationModal = ({
   visible,
@@ -10,10 +12,12 @@ const ApplicationModal = ({
 }: {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
-  job: Job | undefined;
+  job: Job;
 }) => {
   const [resumeLink, setResumeLink] = useState<string>("");
   const [err, setErr] = useState("");
+  const [loading, setLoading] = useState(false);
+  const environment = useRelayEnvironment();
 
   const submitApplication = () => {
     if (resumeLink === "") {
@@ -22,27 +26,20 @@ const ApplicationModal = ({
       return;
     }
 
-    const data: Application = {
-      id: uuidV4(),
-      name: job?.companyName || "",
-      designation: job?.openingName || "",
+    setLoading(true);
+    const data: ApplicationData = {
+      jobId: job.id,
       resume: resumeLink,
-      status: "Waiting",
     };
-
     console.log(JSON.stringify(data));
 
-    postData("http://localhost:5000/applications", data)
-      .then(() => message.success("Your Application Submitted Successfully"))
-      .catch((err) => {
-        console.log(err);
-        message.error(
-          "Your application could not submitted successfully please try again!"
-        );
-      });
-
-    setVisible(false);
+    ApplyJob.commit(environment, data, setLoading, setVisible);
   };
+
+  const withdrawApplication = () => {
+    setLoading(true)
+    WithdrawJob.commit(environment, job.id, setLoading, setVisible)
+  }
 
   return (
     <Modal
@@ -53,22 +50,35 @@ const ApplicationModal = ({
         <Button key="back" onClick={() => setVisible(false)}>
           Return
         </Button>,
-        <Button key="submit" type="primary" onClick={submitApplication}>
+        <Button
+          key="submit"
+          type="primary"
+          loading={loading}
+          onClick={job?.status === "Not Applied" ? submitApplication : withdrawApplication}
+        >
           Submit
         </Button>,
       ]}
     >
-      <Space direction="vertical" size="large">
+      {job?.status === "Not Applied" ? (
+        <Space direction="vertical" size="large">
+          <Typography.Text>
+            You are applying for <strong>{job?.designation}</strong> in{" "}
+            <strong>{job?.name}</strong>
+          </Typography.Text>
+          <Input
+            placeholder="Resume"
+            value={resumeLink}
+            onChange={(e) => setResumeLink(e.target.value)}
+          />
+        </Space>
+      ) : (
         <Typography.Text>
-          You are applying for <strong>{job?.openingName}</strong> in{" "}
-          <strong>{job?.companyName}</strong>
+          You are withdrawing your application for <strong>{job?.designation}</strong> in{" "}
+          <strong>{job?.name}</strong>
         </Typography.Text>
-        <Input
-          placeholder="Resume"
-          value={resumeLink}
-          onChange={(e) => setResumeLink(e.target.value)}
-        />
-      </Space>
+      )}
+
       {err && (
         <Alert
           message={err}

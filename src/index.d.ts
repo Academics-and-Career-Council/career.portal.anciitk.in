@@ -4,21 +4,38 @@ interface News {
 }
 
 interface Job {
-  id: String;
-  companyName: String;
-  openingName: String;
-  deadline: String;
-  stipend: String;
-  location: String;
-  description: String;
-  eligiblity: String;
-  status: "Waiting" | "Not Applied" | "Accepted";
+  readonly id: string;
+  readonly name: string;
+  readonly stipend: string;
+  readonly designation: string;
+  readonly status: string;
+}
+
+interface JobDetails {
+  readonly id: string;
+  readonly name: string;
+  readonly stipend: string;
+  readonly designation: string;
+  readonly jd: string;
+  readonly nature_of_business: string;
+  readonly location: string;
+  readonly description: string;
+  readonly eligibilty: string;
+  readonly shortlist: string;
+  readonly test: string;
 }
 
 interface Application {
-  id: String;
-  name: String;
-  designation: String;
-  resume: String;
-  status: "Waiting" | "Rejected" | "Accepted";
+  readonly id: string;
+  readonly student: {
+    readonly name: string;
+    readonly rollno: number;
+    readonly branch: string;
+  };
+  readonly job: {
+    readonly name: string;
+    readonly designation: string;
+  };
+  readonly status: string;
+  readonly resume: string;
 }

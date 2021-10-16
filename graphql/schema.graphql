@@ -1,0 +1,97 @@
+type User {
+  id: ID!
+  name: String!
+  rollno: Int!
+  branch: String!
+  username: String!
+  applications: [Application]!
+}
+
+type Job {
+  id: ID!
+  name: String!
+  stipend: String!
+  jd: String!
+  nature_of_business: String!
+  designation: String!
+  location: String!
+  description: String!
+  eligibilty: String!
+  shortlist: String!
+  test: String!
+  status: String!
+}
+
+type Application {
+  id: ID!
+  student: UserData!
+  job: Job!
+  status: String!
+  resume: String!
+}
+
+input ApplicationData {
+  resume: String!
+  jobId: String!
+}
+
+input JobData {
+  name: String!
+  stipend: String!
+  jd: String!
+  nature_of_business: String!
+  designation: String!
+  location: String!
+  description: String!
+  eligibilty: String!
+  shortlist: String!
+  test: String!
+}
+
+input NotificationData {
+  heading: String!
+  data: String!
+}
+
+type Notification {
+  id: ID!
+  heading: String!
+  data: String!
+}
+
+type ApplicationString{
+  applications: String!
+}
+
+type Query {
+  getJobs: [Job]!
+  getJob(id: ID!): Job!
+  getNotifications: [Notification]!
+  getApplications: [Application]!
+  getStatus(id: ID): String!
+  checkUser: Boolean!
+  downloadApplications(jobID: ID!): ApplicationString!
+}
+
+type Response {
+  ok: Boolean!
+  message: String!
+}
+
+type UserData {
+  name: String!
+  rollno: Int!
+  branch: String!
+}
+
+type Mutation {
+  applyJob(data: ApplicationData!): Job!
+  withdrawJob(id: ID!): Job!
+  addJob(data: JobData!): Job!
+  removeJob(id: ID!): Job!
+  updateJob(id: ID!, data: JobData!): Job!
+  addUser(data: String): User!
+  addNotification(data: NotificationData): Notification!
+  removeNotification(id: ID!): Notification!
+  updateNotification(id: ID!, data: NotificationData!): Notification!
+}

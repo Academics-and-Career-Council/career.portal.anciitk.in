@@ -2,7 +2,7 @@ import { Descriptions, Button } from "antd";
 
 const { Item } = Descriptions;
 
-const ApplicationCard = ({ application }: { application: Application }) => {
+const ApplicationCard = ({ application }: { application: Application | null }) => {
   return (
     <div>
       <Descriptions
@@ -10,11 +10,11 @@ const ApplicationCard = ({ application }: { application: Application }) => {
         column={1}
         style={{ textAlign: "left", width: "90vw" }}
       >
-        <Item label="Company">{application.name}</Item>
-        <Item label="Designation">{application.designation}</Item>
-        <Item label="Status">{application.status}</Item>
+        <Item label="Company">{application?.job.name}</Item>
+        <Item label="Designation">{application?.job.designation}</Item>
+        <Item label="Status">{application?.status}</Item>
       </Descriptions>
-      <a href={`${application.resume}`}>
+      <a href={`${application?.resume}`}>
         <Button type="primary" style={{ width: "100%" }}>
           View Resume
         </Button>

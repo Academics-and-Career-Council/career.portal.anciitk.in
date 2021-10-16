@@ -16,14 +16,14 @@ import logout from "../services/logout";
 
 const DashboardNavbar = () => {
   const [visible, setVisible] = useState(false);
-  const [{ logoutUrl }, setSession] = useRecoilState(SESSION_STATE);
+  const [session, setSession] = useRecoilState(SESSION_STATE);
 
   return (
     <>
       <Menu mode="horizontal" theme="dark">
         <Menu.Item icon={<MenuOutlined />} onClick={() => setVisible(true)} />
         <Menu.Item>
-          <Button onClick={() => logout(logoutUrl, setSession)}>Logout</Button>
+          <Button onClick={() => logout(session?.logoutUrl || "", setSession)}>Logout</Button>
         </Menu.Item>
       </Menu>
       <Drawer

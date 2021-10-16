@@ -1,13 +1,14 @@
 import axios, { AxiosError } from "axios";
 import type { SetterOrUpdater } from "recoil";
+import { SessionState } from "../store";
 
 const logout = (
   logoutUrl: string,
-  setSession: SetterOrUpdater<{ active: boolean; logoutUrl: string }>
+  setSession: SetterOrUpdater<SessionState | undefined>
 ) => {
   axios
     .get(logoutUrl, { withCredentials: true })
-    .then(() => setSession({ active: false, logoutUrl: "" }))
+    .then(() => setSession(undefined))
     .catch((err: AxiosError) => {
       return Promise.reject(err);
     });

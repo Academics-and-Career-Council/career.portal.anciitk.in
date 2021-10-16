@@ -28,7 +28,7 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
     contact: 6,
   };
   const [collapsed, setCollapsed] = useState(true);
-  const [{ logoutUrl }, setSession] = useRecoilState(SESSION_STATE);
+  const [session, setSession] = useRecoilState(SESSION_STATE);
 
   const path = window.location.pathname.split("/")[1];
   const key = pathsToKey[path].toString();
@@ -60,7 +60,7 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
           <Button
             type="ghost"
             style={{ color: "white" }}
-            onClick={() => logout(logoutUrl, setSession)}
+            onClick={() => logout(session?.logoutUrl || "", setSession)}
           >
             Logout
           </Button>

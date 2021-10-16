@@ -23,19 +23,19 @@ const CalendarPage: React.FC = () => {
 
   const dateCellRender = (value: Moment) => {
     return jobs.map(
-      (job) =>
-        job.deadline.slice(0, 2) === value.date().toString() && (
+      (job) =>(
+        // job.deadline.slice(0, 2) === value.date().toString() && (
           <Popover
             title="Job Details"
             content={
               <Space direction="vertical">
-                <Title level={3}>{job.companyName}</Title>
-                <Text>{job.openingName}</Text>
-                <Text>{job.deadline}</Text>
+                <Title level={3}>{job.name}</Title>
+                <Text>{job.designation}</Text>
+                <Text>{'deadline'}</Text>
               </Space>
             }
           >
-            <Badge status="warning" text={job.companyName} />
+            <Badge status="warning" text={job.name} />
           </Popover>
         )
     );

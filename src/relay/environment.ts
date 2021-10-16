@@ -7,10 +7,16 @@ import {
 } from "relay-runtime";
 
 const fetchQuery: FetchFunction = async (params, variables) => {
-  return await fetch("http.localhost:5000/", {
+  // for development purpose
+  console.log(
+    `fetching query ${params.name} with ${JSON.stringify(variables)}`
+  );
+
+  return await fetch(process.env.REACT_APP_BACKEND_URL || "", {
     method: "POST",
     headers: {
-      "Contemt-type": "application/json",
+      "Content-type": "application/json",
+      "email": "vgoyal20@iitk.ac.in"
     },
     body: JSON.stringify({
       query: params.text,
@@ -21,9 +27,7 @@ const fetchQuery: FetchFunction = async (params, variables) => {
   });
 };
 
-export default function makeEnvironment() {
-  return new Environment({
-    network: Network.create(fetchQuery),
-    store: new Store(new RecordSource()),
-  });
-}
+export default new Environment({
+  network: Network.create(fetchQuery),
+  store: new Store(new RecordSource()),
+});

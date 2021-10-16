@@ -1,39 +1,34 @@
-import { useEffect, useState } from "react";
+import { ApplicationsQuery } from "../__generated__/ApplicationsQuery.graphql";
 import { Typography, Table, Space } from "antd";
 import { Helmet } from "react-helmet";
 import { MobileView, BrowserView, isMobile } from "react-device-detect";
+import { usePreloadedQuery, GraphQLTaggedNode } from "react-relay";
 
 import Wrapper from "../components/Wrapper";
-import Loader from "../components/loader";
 import MobileWrapper from "../components/MobileWrapper";
 import ApplicationCard from "../components/ApplicationCard";
-import { fetchData } from "../services/fetch";
 
-const Applications: React.FC = () => {
-  const [applications, setApplications] = useState<Application[] | undefined>(
-    undefined
-  );
-  const [err, setErr] = useState(undefined);
+type Props = {
+  queryRef: any;
+  query: GraphQLTaggedNode;
+};
 
-  useEffect(() => {
-    fetchData("http://localhost:5000/applications")
-      .then((data: Application[]) => setApplications(data))
-      .catch((err) => {
-        console.error(err);
-        setErr(err.message);
-      });
-  }, []);
+const Applications: React.FC<Props> = ({ queryRef, query }) => {
+  // const [err, setErr] = useState(undefined);
+  const data = usePreloadedQuery<ApplicationsQuery>(query, queryRef);
 
   const columns = [
     {
       title: "COMPANY",
-      dataIndex: "name",
+      dataIndex: "job",
       key: "name",
+      render: (job: any) => job.name
     },
     {
       title: "DESIGNATION",
-      dataIndex: "designation",
+      dataIndex: "job",
       key: "designation",
+      render: (job: any) => job.designation
     },
     {
       title: "RESUME",
@@ -63,18 +58,19 @@ const Applications: React.FC = () => {
         <Text>These are the posts that you have applied for.</Text>
       </div>
 
-      {err ? (
-        <Text>{err}</Text>
-      ) : applications === undefined ? (
-        <Loader />
-      ) : isMobile ? (
+      {isMobile ? (
         <Space direction="vertical" size="large">
-          {applications.map((application, index) => (
+          {data.getApplications.map((application, index) => (
             <ApplicationCard key={index} application={application} />
           ))}
         </Space>
       ) : (
-        <Table columns={columns} dataSource={applications} pagination={false} />
+        <Table
+          columns={columns}
+          // @ts-ignore
+          dataSource={data.getApplications}
+          pagination={false}
+        />
       )}
     </div>
   );

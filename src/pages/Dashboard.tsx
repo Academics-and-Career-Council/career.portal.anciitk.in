@@ -1,26 +1,22 @@
-import { useEffect, useState } from "react";
+import type { DashboardQuery as DashboardQueryType } from "../__generated__/DashboardQuery.graphql";
 import { Typography } from "antd";
 import { Helmet } from "react-helmet";
 import { MobileView, BrowserView } from "react-device-detect";
+import { GraphQLTaggedNode, usePreloadedQuery } from "react-relay";
+import { useState } from "react";
 
 import Wrapper from "../components/Wrapper";
-import Loader from "../components/loader";
 import MobileWrapper from "../components/MobileWrapper";
-import { fetchData } from "../services/fetch";
 import "../styles/dashboard.css";
 
-const Dashboard: React.FC = () => {
-  const [newsArr, setNewsArr] = useState<News[] | undefined>(undefined);
-  const [err, setErr] = useState(undefined);
+type Props = {
+  queryRef: any;
+  query: GraphQLTaggedNode;
+};
 
-  useEffect(() => {
-    fetchData("http://localhost:5000/news")
-      .then((data: News[]) => setNewsArr(data))
-      .catch((err) => {
-        console.log(err);
-        setErr(err.message);
-      });
-  }, []);
+const Dashboard: React.FC<Props> = ({ queryRef, query }) => {
+  // const [err, setErr] = useState(undefined);
+  const data = usePreloadedQuery<DashboardQueryType>(query, queryRef);
 
   const { Title, Text } = Typography;
 
@@ -32,26 +28,20 @@ const Dashboard: React.FC = () => {
       <Title level={2} className="title">
         Notifications
       </Title>
-      {err ? (
-        <div>{err}</div>
-      ) : newsArr === undefined ? (
-        <Loader />
-      ) : (
-        <div className="newsList">
-          {newsArr.length === 0 ? (
-            <div>No Latest news to show.</div>
-          ) : (
-            newsArr.map((news, index) => {
-              return (
-                <div key={index} className="newsItem">
-                  <Text>{news.title}</Text>
-                  <Text>{news.date}</Text>
-                </div>
-              );
-            })
-          )}
-        </div>
-      )}
+      <div className="newsList">
+        {data.getNotifications.length === 0 ? (
+          <div>No Latest news to show.</div>
+        ) : (
+          data.getNotifications.map((news, index) => {
+            return (
+              <div key={index} className="newsItem">
+                <Text>{news?.heading}</Text>
+                <Text>{news?.data}</Text>
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 

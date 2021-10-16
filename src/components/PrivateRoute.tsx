@@ -19,7 +19,7 @@ const PrivateRoute = (props: {
         {...rest}
         path={path}
         render={(props) => {
-          return session.active ? (
+          return session ? (
             <Component {...props} />
           ) : (
             <Redirect to={`/verify?next=${pathname}`} />

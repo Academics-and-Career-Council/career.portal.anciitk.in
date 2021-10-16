@@ -10,7 +10,7 @@ import environment from "./relay/environment";
 
 ReactDOM.render(
   <React.StrictMode>
-    <RelayEnvironmentProvider environment={environment()}>
+    <RelayEnvironmentProvider environment={environment}>
       <RecoilRoot>
         <App />
       </RecoilRoot>

@@ -1,5 +1,12 @@
 {
   "plugins": [
-    "relay"
+    ["relay", { "artifactDirectory": "./src/__generated__" }],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "style": true
+      }
+    ]
   ]
 }
