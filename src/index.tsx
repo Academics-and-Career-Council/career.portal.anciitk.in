@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { RecoilRoot } from "recoil";
 import { RelayEnvironmentProvider } from "react-relay/hooks";
 import "antd/dist/antd.css";
+import "@anciitk/kratos-verify-session/dist/index.css";
 
 import environment from "./relay/environment";
 

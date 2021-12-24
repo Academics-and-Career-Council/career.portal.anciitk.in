@@ -46,9 +46,6 @@ const DashboardNavbar = () => {
           <Menu.Item key="4" icon={<CarryOutOutlined />}>
             <Link to="/applications">Your Applications</Link>
           </Menu.Item>
-          <Menu.Item key="5" icon={<CalendarOutlined />}>
-            <Link to="/calender">Calendar</Link>
-          </Menu.Item>
           <Menu.Item key="7" icon={<MessageOutlined />}>
             <a
               href="https://anciitk.in/contact.html"

@@ -1,36 +1,40 @@
-import { ApplicationsQuery } from "../__generated__/ApplicationsQuery.graphql"
-import { graphql, useQueryLoader } from "react-relay"
-import { useEffect, Suspense } from "react"
+import { ApplicationsQuery } from "../__generated__/ApplicationsQuery.graphql";
+import { graphql, useQueryLoader } from "react-relay";
+import { useEffect, Suspense } from "react";
 
-import Loader from "../components/loader"
-import Applications from "../pages/Applications"
+import Loader from "../components/loader";
+import Applications from "../pages/Applications";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const query = graphql`
-  query ApplicationsQuery{
-    getApplications{
-      id,
-      student{
-        name,
-        rollno,
+  query ApplicationsQuery {
+    getApplications {
+      id
+      student {
+        name
+        rollno
         branch
-      },
-      job{
-        name,
+      }
+      job {
+        name
         designation
-      }, 
-      status,
+      }
+      status
       resume
     }
   }
-`
+`;
 
-const ApplicationsContainer:React.FC = () => {
-  const [queryRef, loadQuery] = useQueryLoader<ApplicationsQuery>(query)
+const ApplicationsContainer: React.FC = () => {
+  const [queryRef, loadQuery] = useQueryLoader<ApplicationsQuery>(query);
   useEffect(() => {
-    loadQuery({}, {
-      fetchPolicy: 'network-only'
-    })
-  }, [loadQuery])
+    loadQuery(
+      {},
+      {
+        fetchPolicy: "network-only",
+      }
+    );
+  }, [loadQuery]);
 
   if (!queryRef) {
     return <Loader />;
@@ -38,9 +42,11 @@ const ApplicationsContainer:React.FC = () => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <Applications queryRef={queryRef} query={query} />
+      <ErrorBoundary>
+        <Applications queryRef={queryRef} query={query} />
+      </ErrorBoundary>
     </Suspense>
   );
-}
+};
 
-export default ApplicationsContainer
+export default ApplicationsContainer;

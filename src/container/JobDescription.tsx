@@ -5,6 +5,7 @@ import { useEffect, Suspense } from "react";
 
 import Loader from "../components/loader";
 import JobDescription from "../pages/JobDescription";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const query = graphql`
   query JobDescriptionQuery($id: ID!) {
@@ -35,7 +36,9 @@ const OpeningsContainer: React.FC<
 
   return (
     <Suspense fallback={<Loader />}>
-      <JobDescription queryRef={queryRef} query={query} />
+      <ErrorBoundary>
+        <JobDescription queryRef={queryRef} query={query} />
+      </ErrorBoundary>
     </Suspense>
   );
 };

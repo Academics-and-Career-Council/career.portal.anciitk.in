@@ -12,11 +12,11 @@ const fetchQuery: FetchFunction = async (params, variables) => {
     `fetching query ${params.name} with ${JSON.stringify(variables)}`
   );
 
-  return await fetch(process.env.REACT_APP_BACKEND_URL || "", {
+  return await fetch(`${process.env.REACT_APP_BACKEND_URL}`, {
     method: "POST",
+    credentials: 'include',
     headers: {
       "Content-type": "application/json",
-      "email": "vgoyal20@iitk.ac.in"
     },
     body: JSON.stringify({
       query: params.text,

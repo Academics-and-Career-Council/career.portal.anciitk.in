@@ -9,13 +9,16 @@ import {
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { MobileView, BrowserView, isMobile } from "react-device-detect";
+import { useRecoilValue } from "recoil";
 
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
 import { Helmet } from "react-helmet";
+import { SESSION_STATE } from "../store";
 
 const Profile: React.FC = () => {
   const { Title } = Typography;
+  const session = useRecoilValue(SESSION_STATE)
   const jsx = (
     <div>
       <Helmet>
@@ -64,11 +67,11 @@ const Profile: React.FC = () => {
           column={1}
           style={{ width: "400px", marginTop: isMobile ? "50px" : "0" }}
         >
-          <Descriptions.Item label="Roll No">Vaibhav goyal</Descriptions.Item>
+          <Descriptions.Item label="Name">{session?.user.name}</Descriptions.Item>
+          <Descriptions.Item label="Roll No">{session?.user.rollno}</Descriptions.Item>
           <Descriptions.Item label="Branch">
-            Chemical Engineering
+            {session?.user.department}
           </Descriptions.Item>
-          <Descriptions.Item label="CPI">8.0</Descriptions.Item>
         </Descriptions>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { graphql, useQueryLoader } from "react-relay";
 import Dashboard from "../pages/Dashboard";
 
 import Loader from "../components/loader";
+import ErrorBoundary from "../components/ErrorBoundary";
 
 const query = graphql`
   query DashboardQuery {
@@ -28,7 +29,9 @@ const DashboardContainer: React.FC = () => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <Dashboard queryRef={queryRef} query={query} />
+      <ErrorBoundary>
+        <Dashboard queryRef={queryRef} query={query} />
+      </ErrorBoundary>
     </Suspense>
   );
 };

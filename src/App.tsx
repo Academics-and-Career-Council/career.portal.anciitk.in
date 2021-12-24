@@ -14,7 +14,6 @@ import CalendarPage from "./pages/CalendarPage";
 import JobDescription from "./container/JobDescription";
 import Verify from "./pages/Verify";
 import "./App.css";
-import "@anciitk/kratos-verify-session/dist/index.css"
 
 function App() {
   return (
@@ -29,7 +28,6 @@ function App() {
         <PrivateRoute component={Openings} path="/openings" />
         <PrivateRoute component={Applications} path="/applications" />
         <PrivateRoute component={Profile} path="/profile" />
-        <PrivateRoute component={CalendarPage} path="/calender" />
         <Route path="/verify" component={Verify} />
         <Route path="/" exact>
           <Redirect to="/dashboard" />

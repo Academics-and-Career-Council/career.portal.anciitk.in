@@ -30,7 +30,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start-rewired": "react-app-rewired start",
+    "start-rewired": "eval $(grep 'PORT' .env.development) react-app-rewired start",
     "build-rewired": "react-app-rewired build",
     "test-rewired": "react-app-rewired test --env=jsdom",
     "relay": "relay-compiler --src ./src --schema ./graphql/schema.graphql --language typescript --artifactDirectory ./src/__generated__",
