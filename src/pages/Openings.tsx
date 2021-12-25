@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Typography, Button, Table, Space } from "antd";
 import { Helmet } from "react-helmet";
 import { BrowserView, MobileView, isMobile } from "react-device-detect";
+import moment from "moment";
 
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
@@ -43,6 +44,10 @@ const Openings: React.FC<Props> = ({ queryRef, query }) => {
       title: "APPLICATION DEADLINE",
       dataIndex: "deadline",
       key: "deadline",
+      sortOrder: "descend",
+      sortDirections: [],
+      sorter: (a: any, b: any) => moment(a.deadline).diff(moment(b.deadline)),
+      render: (date: string) => moment(date).format("MMM Do YY HH:mm a"),
     },
     {
       title: "ACTION",
@@ -55,7 +60,7 @@ const Openings: React.FC<Props> = ({ queryRef, query }) => {
             setModalJob(record);
             setVisible(true);
           }}
-          disabled={record.status !== 'Not Applied'}
+          disabled={record.status !== "Not Applied"}
         >
           Apply
         </Button>

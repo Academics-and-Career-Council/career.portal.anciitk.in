@@ -10,6 +10,7 @@ export type DashboardQueryResponse = {
         readonly id: string;
         readonly heading: string;
         readonly data: string;
+        readonly modified: string;
     } | null>;
 };
 export type DashboardQuery = {
@@ -25,6 +26,7 @@ query DashboardQuery {
     id
     heading
     data
+    modified
   }
 }
 */
@@ -59,6 +61,13 @@ var v0 = [
         "kind": "ScalarField",
         "name": "data",
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "modified",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -82,14 +91,14 @@ return {
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "68f786628fa2b10924c7f885e1332ed6",
+    "cacheID": "d6b25a9547d1ff6bbb325a3eca1045db",
     "id": null,
     "metadata": {},
     "name": "DashboardQuery",
     "operationKind": "query",
-    "text": "query DashboardQuery {\n  getNotifications {\n    id\n    heading\n    data\n  }\n}\n"
+    "text": "query DashboardQuery {\n  getNotifications {\n    id\n    heading\n    data\n    modified\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = 'd425e9aa910acbb90c96bc95d4572f85';
+(node as any).hash = '93cc43c1403951c8171fbf100997ce0d';
 export default node;

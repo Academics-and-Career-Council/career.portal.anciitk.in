@@ -16,8 +16,10 @@ const query = graphql`
         branch
       }
       job {
+        id
         name
         designation
+        deadline
       }
       status
       resume

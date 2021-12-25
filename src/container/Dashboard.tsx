@@ -12,6 +12,7 @@ const query = graphql`
       id
       heading
       data
+      modified
     }
   }
 `;

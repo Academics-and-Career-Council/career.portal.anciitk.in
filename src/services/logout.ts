@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import type { SetterOrUpdater } from "recoil";
-import { SessionState } from "../store";
+import { SessionState } from "@anciitk/kratos-verify-session";
 
 const logout = (
   logoutUrl: string,

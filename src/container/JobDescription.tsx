@@ -10,14 +10,19 @@ import ErrorBoundary from "../components/ErrorBoundary";
 const query = graphql`
   query JobDescriptionQuery($id: ID!) {
     getJob(id: $id) {
+      id
       name
       stipend
-      designation
+      deadline
       jd
+      nature_of_business
+      designation
       location
       description
-      eligibilty
+      eligibility
       shortlist
+      test
+      status
     }
   }
 `;

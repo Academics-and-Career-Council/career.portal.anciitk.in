@@ -7,6 +7,7 @@ import { usePreloadedQuery, GraphQLTaggedNode } from "react-relay";
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
 import ApplicationCard from "../components/ApplicationCard";
+import moment from "moment";
 
 type Props = {
   queryRef: any;
@@ -45,6 +46,15 @@ const Applications: React.FC<Props> = ({ queryRef, query }) => {
       dataIndex: "status",
       key: "status",
     },
+    {
+      title: "DEADLINE",
+      dataIndex: "job",
+      key: "job",
+      sortOrder: "descend",
+      sortDirections: [],
+      sorter: (a: any, b: any) => moment(a.job.deadline).diff(moment(b.job.deadline)),
+      render: (_: any, application: any) => moment(application.job.deadline).format("MMM Do YY HH:mm a"),
+    }
   ];
 
   const { Title, Text } = Typography;
@@ -66,6 +76,7 @@ const Applications: React.FC<Props> = ({ queryRef, query }) => {
         </Space>
       ) : (
         <Table
+          //@ts-ignore
           columns={columns}
           // @ts-ignore
           dataSource={data.getApplications}

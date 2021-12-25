@@ -46,7 +46,7 @@ const JobDescription: React.FC<Props> = ({ queryRef, query }) => {
         <Item label="Job Description" span={2}>
           {data.getJob.description}
         </Item>
-        <Item label="Eligiblity Criterion">{data.getJob.eligibilty}</Item>
+        <Item label="Eligiblity Criterion">{data.getJob.eligibility}</Item>
       </Descriptions>
     </div>
   );

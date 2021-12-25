@@ -11,21 +11,45 @@ type Job {
   id: ID!
   name: String!
   stipend: String!
+  deadline: String!
   jd: String!
   nature_of_business: String!
   designation: String!
   location: String!
   description: String!
-  eligibilty: String!
+  eligibility: String!
   shortlist: String!
   test: String!
   status: String!
+}
+
+type AdminJob {
+  id: ID!
+  name: String!
+  stipend: String!
+  deadline: String!
+  jd: String!
+  nature_of_business: String!
+  designation: String!
+  location: String!
+  description: String!
+  eligibility: String!
+  shortlist: String!
+  test: String!
+  visibility: Boolean!
 }
 
 type Application {
   id: ID!
   student: UserData!
   job: Job!
+  status: String!
+  resume: String!
+}
+
+type AdminApplication {
+  id: ID!
+  student: UserData
   status: String!
   resume: String!
 }
@@ -39,11 +63,12 @@ input JobData {
   name: String!
   stipend: String!
   jd: String!
+  deadline: String!
   nature_of_business: String!
   designation: String!
   location: String!
   description: String!
-  eligibilty: String!
+  eligibility: String!
   shortlist: String!
   test: String!
 }
@@ -57,6 +82,7 @@ type Notification {
   id: ID!
   heading: String!
   data: String!
+  modified: String!
 }
 
 type ApplicationString{
@@ -66,10 +92,13 @@ type ApplicationString{
 type Query {
   getJobs: [Job]!
   getJob(id: ID!): Job!
+  getAdminJobs: [AdminJob]!
+  getAdminJob(id: ID!): AdminJob
   getNotifications: [Notification]!
+  getNotification(id: ID!): Notification!
   getApplications: [Application]!
+  getAdminApplications(jobID: ID!): [AdminApplication]!
   getStatus(id: ID): String!
-  checkUser: Boolean!
   downloadApplications(jobID: ID!): ApplicationString!
 }
 
@@ -87,9 +116,10 @@ type UserData {
 type Mutation {
   applyJob(data: ApplicationData!): Job!
   withdrawJob(id: ID!): Job!
-  addJob(data: JobData!): Job!
-  removeJob(id: ID!): Job!
-  updateJob(id: ID!, data: JobData!): Job!
+  addJob(data: JobData!): AdminJob!
+  removeJob(id: ID!): AdminJob!
+  toggleJob(id: ID!): AdminJob!
+  updateJob(id: ID!, data: JobData!): AdminJob!
   addUser(data: String): User!
   addNotification(data: NotificationData): Notification!
   removeNotification(id: ID!): Notification!
