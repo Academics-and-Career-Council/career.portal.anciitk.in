@@ -7,14 +7,9 @@ import {
 } from "relay-runtime";
 
 const fetchQuery: FetchFunction = async (params, variables) => {
-  // for development purpose
-  console.log(
-    `fetching query ${params.name} with ${JSON.stringify(variables)}`
-  );
-
   return await fetch(`${process.env.REACT_APP_BACKEND_URL}`, {
     method: "POST",
-    credentials: 'include',
+    credentials: "include",
     headers: {
       "Content-type": "application/json",
     },

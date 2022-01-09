@@ -9,20 +9,25 @@ interface Job {
   readonly stipend: string;
   readonly designation: string;
   readonly status: string;
+  readonly deadline: string;
+  readonly application_process: string;
 }
 
 interface JobDetails {
   readonly id: string;
   readonly name: string;
   readonly stipend: string;
-  readonly designation: string;
+  readonly deadline: string;
   readonly jd: string;
   readonly nature_of_business: string;
+  readonly designation: string;
   readonly location: string;
   readonly description: string;
-  readonly eligibilty: string;
+  readonly eligibility: string;
   readonly shortlist: string;
   readonly test: string;
+  readonly status: string;
+  readonly application_process: string;
 }
 
 interface Application {

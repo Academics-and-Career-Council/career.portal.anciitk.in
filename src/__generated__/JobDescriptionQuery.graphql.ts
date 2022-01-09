@@ -21,7 +21,7 @@ export type JobDescriptionQueryResponse = {
         readonly eligibility: string;
         readonly shortlist: string;
         readonly test: string;
-        readonly status: string;
+        readonly application_process: string;
     };
 };
 export type JobDescriptionQuery = {
@@ -48,7 +48,7 @@ query JobDescriptionQuery(
     eligibility
     shortlist
     test
-    status
+    application_process
   }
 }
 */
@@ -164,7 +164,7 @@ v1 = [
         "alias": null,
         "args": null,
         "kind": "ScalarField",
-        "name": "status",
+        "name": "application_process",
         "storageKey": null
       }
     ],
@@ -189,14 +189,14 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "1901e73aa8d571ae17d1734aba5e9946",
+    "cacheID": "b5ed1c4c13fae14736ea74146e1c9533",
     "id": null,
     "metadata": {},
     "name": "JobDescriptionQuery",
     "operationKind": "query",
-    "text": "query JobDescriptionQuery(\n  $id: ID!\n) {\n  getJob(id: $id) {\n    id\n    name\n    stipend\n    deadline\n    jd\n    nature_of_business\n    designation\n    location\n    description\n    eligibility\n    shortlist\n    test\n    status\n  }\n}\n"
+    "text": "query JobDescriptionQuery(\n  $id: ID!\n) {\n  getJob(id: $id) {\n    id\n    name\n    stipend\n    deadline\n    jd\n    nature_of_business\n    designation\n    location\n    description\n    eligibility\n    shortlist\n    test\n    application_process\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '50223814614a42a8301c59f67fa2132c';
+(node as any).hash = '7632de9654cadc75b28fecf314fd15c0';
 export default node;

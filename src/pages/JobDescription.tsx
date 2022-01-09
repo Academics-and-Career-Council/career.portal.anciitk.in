@@ -2,22 +2,40 @@ import { JobDescriptionQuery } from "../__generated__/JobDescriptionQuery.graphq
 import { Typography, Descriptions } from "antd";
 import { Helmet } from "react-helmet";
 import { BrowserView, MobileView } from "react-device-detect";
+import moment from "moment";
+import parse from "html-react-parser";
 
 import MobileWrapper from "../components/MobileWrapper";
 import Wrapper from "../components/Wrapper";
 import { usePreloadedQuery, GraphQLTaggedNode } from "react-relay";
+import MarkdownIt from "markdown-it";
 
 type Props = {
   queryRef: any;
   query: GraphQLTaggedNode;
 };
 
+const { Title, Text } = Typography;
+const { Item } = Descriptions;
+
 const JobDescription: React.FC<Props> = ({ queryRef, query }) => {
   // const [err, setErr] = useState(undefined);
-  const data = usePreloadedQuery<JobDescriptionQuery>(query, queryRef);
+  const { getJob } = usePreloadedQuery<JobDescriptionQuery>(query, queryRef);
+  const {
+    name,
+    description,
+    deadline,
+    designation,
+    eligibility,
+    location,
+    shortlist,
+    stipend,
+    nature_of_business,
+    application_process,
+    test,
+  } = getJob;
 
-  const { Title, Text } = Typography;
-  const { Item } = Descriptions;
+  const mdParser = new MarkdownIt();
   const jsx = (
     <div style={{ textAlign: "center" }}>
       <Helmet>
@@ -28,25 +46,40 @@ const JobDescription: React.FC<Props> = ({ queryRef, query }) => {
       </div>
 
       <Descriptions
-        column={2}
         bordered
         style={{ width: "80%", textAlign: "center", margin: "0 auto" }}
         labelStyle={{
-          backgroundColor: "#555454",
-          color: "white",
           fontWeight: "bolder",
-          width: "200px",
+          // width: "200px",
         }}
+        layout="vertical"
+        column={{ xxl: 3, xl: 2, lg: 2, md: 1, sm: 1, xs: 1 }}
         contentStyle={{ fontSize: "large" }}
       >
-        <Item label="Company Name">{data.getJob.name}</Item>
-        <Item label="Designation">{data.getJob.designation}</Item>
-        <Item label="Job Location">{data.getJob.location}</Item>
-        <Item label="Stipend">{data.getJob.stipend}</Item>
-        <Item label="Job Description" span={2}>
-          {data.getJob.description}
+        <Item label="Company Name">{name}</Item>
+        <Item label="Designation">{designation}</Item>
+        <Item label="Job Location">{location}</Item>
+        <Item label="Stipend">{stipend}</Item>
+        <Item label="Job Deadline">
+          {moment(deadline).format("MMM Do YY HH:mm a")}
         </Item>
-        <Item label="Eligiblity Criterion">{data.getJob.eligibility}</Item>
+        <Item label="Nature of Business">{nature_of_business}</Item>
+        <Item label="Eligiblity Criterion" span={2}>
+          {eligibility}
+        </Item>
+        <Item label="Job Description" span={2}>
+          {parse(mdParser.render(description))}
+        </Item>
+        <Item label="Application Process" span={2}>
+          {parse(mdParser.render(application_process))}
+        </Item>
+        <Item label="Shortlist Citerion" span={2}>
+          {shortlist}
+        </Item>
+
+        <Item label="Test Details" span={2}>
+          {test}
+        </Item>
       </Descriptions>
     </div>
   );

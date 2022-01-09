@@ -23,11 +23,11 @@ const commit = (
     variables: { data },
     onCompleted: (res, err) => {
       setLoading(false);
-      setVisible(false)
+      setVisible(true)
       if (err) {
         message.error(`Unable to Apply for Job Error: ${JSON.stringify(err)}`);
       } else {
-        message.success("Successfully applied for job");
+        message.success("Here is the epplication process");
       }
     },
     onError: (err) => {

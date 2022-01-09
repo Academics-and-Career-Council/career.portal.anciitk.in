@@ -16,7 +16,7 @@ import logout from "../services/logout";
 import logo from "../assets/img/logo192.png";
 import "../styles/wrapper.css";
 
-const { Header, Sider, Content } = Layout;
+const { Header, Sider, Content, Footer } = Layout;
 
 const Wrapper = ({ component }: { component: JSX.Element }) => {
   const pathsToKey: any = {
@@ -107,7 +107,7 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
           style={{
             margin: "30px 30px 0 30px",
             backgroundColor: "#fff",
-            paddingBottom: "50px",
+            // paddingBottom: "50px",
           }}
         >
           {component}
@@ -116,6 +116,18 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
               <UpCircleOutlined />
             </div>
           </BackTop>
+          <Footer
+            style={{
+              marginTop: "30px",
+              display: "block",
+              textAlign: "center",
+              backgroundColor: "black",
+              color: "white",
+            }}
+          >
+            Made with <span style={{ color: "red" }}>&hearts;</span> by
+            Academics and Career council
+          </Footer>
         </Content>
       </Layout>
     </Layout>

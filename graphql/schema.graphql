@@ -21,6 +21,7 @@ type Job {
   shortlist: String!
   test: String!
   status: String!
+  application_process: String!
 }
 
 type AdminJob {
@@ -37,6 +38,7 @@ type AdminJob {
   shortlist: String!
   test: String!
   visibility: Boolean!
+  application_process: String!
 }
 
 type Application {
@@ -71,6 +73,7 @@ input JobData {
   eligibility: String!
   shortlist: String!
   test: String!
+  application_process: String!
 }
 
 input NotificationData {

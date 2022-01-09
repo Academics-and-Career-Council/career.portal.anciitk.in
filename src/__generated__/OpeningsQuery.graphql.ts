@@ -13,6 +13,7 @@ export type OpeningsQueryResponse = {
         readonly designation: string;
         readonly status: string;
         readonly deadline: string;
+        readonly application_process: string;
     } | null>;
 };
 export type OpeningsQuery = {
@@ -31,6 +32,7 @@ query OpeningsQuery {
     designation
     status
     deadline
+    application_process
   }
 }
 */
@@ -86,6 +88,13 @@ var v0 = [
         "kind": "ScalarField",
         "name": "deadline",
         "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "application_process",
+        "storageKey": null
       }
     ],
     "storageKey": null
@@ -109,14 +118,14 @@ return {
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "fc91ffc74c0e454e6d30886b451fda2b",
+    "cacheID": "4768e8fd9863662ed1959498cba4fa8f",
     "id": null,
     "metadata": {},
     "name": "OpeningsQuery",
     "operationKind": "query",
-    "text": "query OpeningsQuery {\n  getJobs {\n    id\n    name\n    stipend\n    designation\n    status\n    deadline\n  }\n}\n"
+    "text": "query OpeningsQuery {\n  getJobs {\n    id\n    name\n    stipend\n    designation\n    status\n    deadline\n    application_process\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '92f34547744a57b1bf241046d48b6cfc';
+(node as any).hash = '99c536c5525a22160e32940ed2281f12';
 export default node;

@@ -22,7 +22,7 @@ const query = graphql`
       eligibility
       shortlist
       test
-      status
+      application_process
     }
   }
 `;

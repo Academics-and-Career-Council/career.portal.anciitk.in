@@ -23,23 +23,31 @@ const Applications: React.FC<Props> = ({ queryRef, query }) => {
       title: "COMPANY",
       dataIndex: "job",
       key: "name",
-      render: (job: any) => job.name
+      render: (job: any) => job.name,
     },
     {
       title: "DESIGNATION",
       dataIndex: "job",
       key: "designation",
-      render: (job: any) => job.designation
+      render: (job: any) => job.designation,
     },
     {
       title: "RESUME",
       dataIndex: "resume",
       key: "resume",
-      render: (text: String) => (
-        <a href={`${text}`} target="_blank" rel="noreferrer">
-          View
-        </a>
-      ),
+      render: (text: string) => {
+        let resumeURL;
+        try {
+          resumeURL = new URL(text)
+          return (
+            <a href={`${text}`} target="_blank" rel="noreferrer">
+              View
+            </a>
+          );
+        } catch (err) {
+          return <span>-------</span>
+        }
+      },
     },
     {
       title: "STATUS",
@@ -52,9 +60,11 @@ const Applications: React.FC<Props> = ({ queryRef, query }) => {
       key: "job",
       sortOrder: "descend",
       sortDirections: [],
-      sorter: (a: any, b: any) => moment(a.job.deadline).diff(moment(b.job.deadline)),
-      render: (_: any, application: any) => moment(application.job.deadline).format("MMM Do YY HH:mm a"),
-    }
+      sorter: (a: any, b: any) =>
+        moment(a.job.deadline).diff(moment(b.job.deadline)),
+      render: (_: any, application: any) =>
+        moment(application.job.deadline).format("MMM Do YY HH:mm a"),
+    },
   ];
 
   const { Title, Text } = Typography;

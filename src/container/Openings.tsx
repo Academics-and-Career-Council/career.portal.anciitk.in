@@ -15,6 +15,7 @@ const query = graphql`
       designation
       status
       deadline
+      application_process
     }
   }
 `;
