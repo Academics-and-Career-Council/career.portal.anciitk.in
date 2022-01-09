@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Drawer, Menu, Button } from "antd";
+import { Drawer, Menu, Button, Space } from "antd";
 import {
   DashboardOutlined,
   UserOutlined,
   ProfileOutlined,
-  CalendarOutlined,
   CarryOutOutlined,
   MessageOutlined,
   MenuOutlined,
@@ -20,11 +19,33 @@ const DashboardNavbar = () => {
 
   return (
     <>
-      <Menu mode="horizontal" theme="dark">
+      <Menu
+        mode="horizontal"
+        theme="dark"
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Menu.Item icon={<MenuOutlined />} onClick={() => setVisible(true)} />
-        <Menu.Item>
-          <Button onClick={() => logout(session?.logoutUrl || "", setSession)}>Logout</Button>
-        </Menu.Item>
+        <Space size="small" style={{ justifyContent: "end" }}>
+          <Menu.Item>
+            <Button type="ghost" style={{ color: "white" }}>
+              <a href={process.env.REACT_APP_LOGIN_URL}>Accounts</a>
+            </Button>
+          </Menu.Item>
+          <Menu.Item>
+            <Button
+              type="ghost"
+              onClick={() => logout(session?.logoutUrl || "", setSession)}
+              style={{ color: "white" }}
+            >
+              Logout
+            </Button>
+          </Menu.Item>
+        </Space>
       </Menu>
       <Drawer
         title="Student Dashboard"

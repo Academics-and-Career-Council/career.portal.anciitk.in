@@ -18,7 +18,7 @@ import { SESSION_STATE } from "../store";
 
 const Profile: React.FC = () => {
   const { Title } = Typography;
-  const session = useRecoilValue(SESSION_STATE)
+  const session = useRecoilValue(SESSION_STATE);
   const jsx = (
     <div>
       <Helmet>
@@ -44,7 +44,7 @@ const Profile: React.FC = () => {
             alt="User image"
             src="https://cdn3.vectorstock.com/i/1000x1000/63/02/face-young-woman-using-face-mask-vector-30736302.jpg"
           />
-          <Space>
+          {/* <Space>
             <Upload>
               <Button>
                 <UploadOutlined /> Change Image
@@ -58,7 +58,7 @@ const Profile: React.FC = () => {
             >
               <Button>Remove Image</Button>
             </Popconfirm>
-          </Space>
+          </Space> */}
         </Space>
 
         <Descriptions
@@ -67,8 +67,12 @@ const Profile: React.FC = () => {
           column={1}
           style={{ width: "400px", marginTop: isMobile ? "50px" : "0" }}
         >
-          <Descriptions.Item label="Name">{session?.user.name}</Descriptions.Item>
-          <Descriptions.Item label="Roll No">{session?.user.rollno}</Descriptions.Item>
+          <Descriptions.Item label="Name">
+            {session?.user.name}
+          </Descriptions.Item>
+          <Descriptions.Item label="Roll No">
+            {session?.user.rollno}
+          </Descriptions.Item>
           <Descriptions.Item label="Branch">
             {session?.user.department}
           </Descriptions.Item>

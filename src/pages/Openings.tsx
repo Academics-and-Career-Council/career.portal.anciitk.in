@@ -133,7 +133,15 @@ const Openings: React.FC<Props> = ({ queryRef, query }) => {
       {isMobile ? (
         <Space direction="vertical" size="large">
           {data.getJobs.map((job, index) => (
-            <OpeningCard key={index} job={job} />
+            <OpeningCard
+              key={index}
+              job={job}
+              loading={loading}
+              setLoading={setLoading}
+              setModalJob={setModalJob}
+              submitApplication={submitApplication}
+              setVisible={setVisible}
+            />
           ))}
         </Space>
       ) : (

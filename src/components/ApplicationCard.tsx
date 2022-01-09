@@ -2,7 +2,11 @@ import { Descriptions, Button } from "antd";
 
 const { Item } = Descriptions;
 
-const ApplicationCard = ({ application }: { application: Application | null }) => {
+const ApplicationCard = ({
+  application,
+}: {
+  application: Application | null;
+}) => {
   return (
     <div>
       <Descriptions
@@ -14,11 +18,13 @@ const ApplicationCard = ({ application }: { application: Application | null }) =
         <Item label="Designation">{application?.job.designation}</Item>
         <Item label="Status">{application?.status}</Item>
       </Descriptions>
-      <a href={`${application?.resume}`}>
-        <Button type="primary" style={{ width: "100%" }}>
-          View Resume
-        </Button>
-      </a>
+      <Button
+        type="primary"
+        style={{ width: "100%" }}
+        disabled={!application?.resume}
+      >
+        <a href={`${application?.resume}`}>View Resume</a>
+      </Button>
     </div>
   );
 };

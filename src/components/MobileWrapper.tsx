@@ -25,7 +25,13 @@ const MobileWrapper = ({ Component }: { Component: JSX.Element }) => {
           </div>
         </BackTop>
       </Content>
-      <Footer style={{ textAlign: "center" }}>
+      <Footer
+        style={{
+          textAlign: "center",
+          backgroundColor: "black",
+          color: "white",
+        }}
+      >
         Made with <span style={{ color: "#e25555" }}>&#9829;</span> by AnC
       </Footer>
     </Layout>
