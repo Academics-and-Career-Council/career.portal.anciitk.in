@@ -42,7 +42,7 @@ const Profile: React.FC = () => {
             width={200}
             height={200}
             alt="User image"
-            src="https://cdn3.vectorstock.com/i/1000x1000/63/02/face-young-woman-using-face-mask-vector-30736302.jpg"
+            src={`https://images-students-iitk.sgp1.digitaloceanspaces.com/images-students-iitk/${session?.user.rollno}.jpg`}
           />
           {/* <Space>
             <Upload>
