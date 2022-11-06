@@ -2,7 +2,7 @@ import { OpeningsQuery } from "../__generated__/OpeningsQuery.graphql";
 import type { ApplicationData } from "../__generated__/ApplyJobMutation.graphql";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Typography, Button, Table, Space, Popconfirm, Tooltip } from "antd";
+import { Typography, Button, Table, Space, Popconfirm, Tooltip, Tag } from "antd";
 import { Helmet } from "react-helmet";
 import { BrowserView, MobileView, isMobile } from "react-device-detect";
 import moment from "moment";
@@ -26,6 +26,7 @@ type Props = {
 const Openings: React.FC<Props> = ({ queryRef, query }) => {
   // const [err, setErr] = useState<string>();
   const [visible, setVisible] = useState(false); // state to manipulate submission modal view state
+  const [trigger, setTrigger] = useState<string>();
   const [modalJob, setModalJob] = useState<Job>(); // to set data in submission modal
   const data = usePreloadedQuery<OpeningsQuery>(query, queryRef);
   const environment = useRelayEnvironment();
@@ -44,6 +45,12 @@ const Openings: React.FC<Props> = ({ queryRef, query }) => {
       title: "COMPANY NAME",
       dataIndex: "name",
       key: "name",
+    },
+    {
+      title: "OPENING TYPE",
+      dataIndex: "type",
+      key: "type",
+      render: (type: string) => <Tag color={type === 'Corporate' ? "blue" : "green"}>{type}</Tag>
     },
     {
       title: "OPENING NAME",
@@ -72,7 +79,7 @@ const Openings: React.FC<Props> = ({ queryRef, query }) => {
         if (record.status === "Not Applied") {
           if (moment().diff(record.deadline) > 0) {
             return (
-              <Button type="ghost" loading={loading} disabled={true}>
+              <Button type="ghost" loading={loading && record.id === trigger} disabled={true}>
                 Apply
               </Button>
             );
@@ -82,11 +89,12 @@ const Openings: React.FC<Props> = ({ queryRef, query }) => {
                 title="Are you sure you want to apply for this job?"
                 onConfirm={() => {
                   setLoading(true);
+                  setTrigger(record.id)
                   submitApplication(record);
                   setModalJob(record);
                 }}
               >
-                <Button type="ghost" loading={loading}>
+                <Button type="ghost" loading={loading && record.id === trigger}>
                   Apply
                 </Button>
               </Popconfirm>

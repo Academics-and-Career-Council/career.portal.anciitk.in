@@ -7,7 +7,7 @@ import { usePreloadedQuery, GraphQLTaggedNode } from "react-relay";
 import Wrapper from "../components/Wrapper";
 import MobileWrapper from "../components/MobileWrapper";
 import ApplicationCard from "../components/ApplicationCard";
-import moment from "moment";
+import moment, { deprecationHandler } from "moment";
 
 type Props = {
   queryRef: any;
@@ -24,6 +24,12 @@ const Applications: React.FC<Props> = ({ queryRef, query }) => {
       dataIndex: "job",
       key: "name",
       render: (job: any) => job.name,
+    },
+    {
+      title: "JOB TYPE",
+      dataIndex: "job",
+      key: "type",
+      render: (job: any) => job.type
     },
     {
       title: "DESIGNATION",

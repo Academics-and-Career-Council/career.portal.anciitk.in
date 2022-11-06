@@ -12,6 +12,7 @@ const query = graphql`
     getJob(id: $id) {
       id
       name
+      type
       stipend
       deadline
       jd

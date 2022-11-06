@@ -11,6 +11,7 @@ const query = graphql`
     getJobs {
       id
       name
+      type
       stipend
       designation
       status

@@ -3,11 +3,7 @@ import {
   Image,
   Descriptions,
   Space,
-  Button,
-  Upload,
-  Popconfirm,
 } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
 import { MobileView, BrowserView, isMobile } from "react-device-detect";
 import { useRecoilValue } from "recoil";
 
@@ -40,9 +36,9 @@ const Profile: React.FC = () => {
           <Image
             className="profile_image"
             width={200}
-            height={200}
             alt="User image"
             src={`https://images-students-iitk.sgp1.digitaloceanspaces.com/images-students-iitk/${session?.user.rollno}.jpg`}
+            style={{ objectFit: 'contain', borderRadius: '15px', border: 'none' }}
           />
           {/* <Space>
             <Upload>

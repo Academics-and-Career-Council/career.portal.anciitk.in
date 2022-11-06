@@ -11,6 +11,7 @@ type Job {
   id: ID!
   name: String!
   stipend: String!
+  type: String!
   deadline: String!
   jd: String!
   nature_of_business: String!
@@ -28,6 +29,7 @@ type AdminJob {
   id: ID!
   name: String!
   stipend: String!
+  type: String!
   deadline: String!
   jd: String!
   nature_of_business: String!
@@ -64,6 +66,7 @@ input ApplicationData {
 input JobData {
   name: String!
   stipend: String!
+  type: String!
   jd: String!
   deadline: String!
   nature_of_business: String!

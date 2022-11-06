@@ -11,6 +11,7 @@ export type JobDescriptionQueryResponse = {
     readonly getJob: {
         readonly id: string;
         readonly name: string;
+        readonly type: string;
         readonly stipend: string;
         readonly deadline: string;
         readonly jd: string;
@@ -38,6 +39,7 @@ query JobDescriptionQuery(
   getJob(id: $id) {
     id
     name
+    type
     stipend
     deadline
     jd
@@ -88,6 +90,13 @@ v1 = [
         "args": null,
         "kind": "ScalarField",
         "name": "name",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "type",
         "storageKey": null
       },
       {
@@ -189,14 +198,14 @@ return {
     "selections": (v1/*: any*/)
   },
   "params": {
-    "cacheID": "b5ed1c4c13fae14736ea74146e1c9533",
+    "cacheID": "e74e0ff9cd24b975301891b71e2a127d",
     "id": null,
     "metadata": {},
     "name": "JobDescriptionQuery",
     "operationKind": "query",
-    "text": "query JobDescriptionQuery(\n  $id: ID!\n) {\n  getJob(id: $id) {\n    id\n    name\n    stipend\n    deadline\n    jd\n    nature_of_business\n    designation\n    location\n    description\n    eligibility\n    shortlist\n    test\n    application_process\n  }\n}\n"
+    "text": "query JobDescriptionQuery(\n  $id: ID!\n) {\n  getJob(id: $id) {\n    id\n    name\n    type\n    stipend\n    deadline\n    jd\n    nature_of_business\n    designation\n    location\n    description\n    eligibility\n    shortlist\n    test\n    application_process\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '7632de9654cadc75b28fecf314fd15c0';
+(node as any).hash = '0f71d2e7fe4656725c6114abcc1f0c24';
 export default node;
