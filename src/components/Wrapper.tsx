@@ -47,7 +47,7 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
           defaultSelectedKeys={[key]}
           style={{ position: "sticky", top: "0px", left: "0" }}
         >
-          <Space align="end" style={{ margin: "20px 0", zIndex: 1 }}>
+          <Space align="end" style={{ margin: "20px auto", zIndex: 1, textAlign: 'center', marginLeft: '15%' }}>
             <img src={logo} alt="anc logo" style={{ height: "50px" }} />
             <Typography.Title
               level={4}
@@ -56,6 +56,7 @@ const Wrapper = ({ component }: { component: JSX.Element }) => {
                 margin: 0,
                 lineHeight: "0.95",
                 marginBottom: "5px",
+                display: collapsed ? 'none' : 'inline-block'
               }}
             >
               CAREER

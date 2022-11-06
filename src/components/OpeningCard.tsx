@@ -27,6 +27,7 @@ const OpeningCard = ({
         style={{ textAlign: "left", width: "90vw" }}
       >
         <Item label="Company">{job?.name}</Item>
+        <Item label="Job Type">{job?.type}</Item>
         <Item label="Designation">{job?.designation}</Item>
         <Item label="Deadline">
           {moment(job?.deadline).format("MMM Do YY HH:mm a")}

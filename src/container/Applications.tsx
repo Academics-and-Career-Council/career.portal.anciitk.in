@@ -18,6 +18,7 @@ const query = graphql`
       job {
         id
         name
+        type
         designation
         deadline
       }

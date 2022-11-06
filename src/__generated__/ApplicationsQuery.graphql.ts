@@ -16,6 +16,7 @@ export type ApplicationsQueryResponse = {
         readonly job: {
             readonly id: string;
             readonly name: string;
+            readonly type: string;
             readonly designation: string;
             readonly deadline: string;
         };
@@ -42,6 +43,7 @@ query ApplicationsQuery {
     job {
       id
       name
+      type
       designation
       deadline
     }
@@ -116,6 +118,13 @@ v2 = [
             "alias": null,
             "args": null,
             "kind": "ScalarField",
+            "name": "type",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
             "name": "designation",
             "storageKey": null
           },
@@ -165,14 +174,14 @@ return {
     "selections": (v2/*: any*/)
   },
   "params": {
-    "cacheID": "b6b833a7dbca8d60856719f80a63dd7c",
+    "cacheID": "054b4e7ee1520219b88b87163fff9f54",
     "id": null,
     "metadata": {},
     "name": "ApplicationsQuery",
     "operationKind": "query",
-    "text": "query ApplicationsQuery {\n  getApplications {\n    id\n    student {\n      name\n      rollno\n      branch\n    }\n    job {\n      id\n      name\n      designation\n      deadline\n    }\n    status\n    resume\n  }\n}\n"
+    "text": "query ApplicationsQuery {\n  getApplications {\n    id\n    student {\n      name\n      rollno\n      branch\n    }\n    job {\n      id\n      name\n      type\n      designation\n      deadline\n    }\n    status\n    resume\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '8c5e03ce7c2c1125ad4f972eb710d088';
+(node as any).hash = '9bb53c6986b627a8861ff7add9971777';
 export default node;

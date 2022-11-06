@@ -6,6 +6,7 @@ interface News {
 interface Job {
   readonly id: string;
   readonly name: string;
+  readonly type: string;
   readonly stipend: string;
   readonly designation: string;
   readonly status: string;
@@ -16,6 +17,7 @@ interface Job {
 interface JobDetails {
   readonly id: string;
   readonly name: string;
+  readonly stipend: string;
   readonly stipend: string;
   readonly deadline: string;
   readonly jd: string;
@@ -40,6 +42,7 @@ interface Application {
   readonly job: {
     readonly name: string;
     readonly designation: string;
+    readonly type: string;
   };
   readonly status: string;
   readonly resume: string;

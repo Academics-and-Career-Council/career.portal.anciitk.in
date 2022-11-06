@@ -9,6 +9,7 @@ export type OpeningsQueryResponse = {
     readonly getJobs: ReadonlyArray<{
         readonly id: string;
         readonly name: string;
+        readonly type: string;
         readonly stipend: string;
         readonly designation: string;
         readonly status: string;
@@ -28,6 +29,7 @@ query OpeningsQuery {
   getJobs {
     id
     name
+    type
     stipend
     designation
     status
@@ -59,6 +61,13 @@ var v0 = [
         "args": null,
         "kind": "ScalarField",
         "name": "name",
+        "storageKey": null
+      },
+      {
+        "alias": null,
+        "args": null,
+        "kind": "ScalarField",
+        "name": "type",
         "storageKey": null
       },
       {
@@ -118,14 +127,14 @@ return {
     "selections": (v0/*: any*/)
   },
   "params": {
-    "cacheID": "4768e8fd9863662ed1959498cba4fa8f",
+    "cacheID": "6fa73e081408595dc45496cbd9673674",
     "id": null,
     "metadata": {},
     "name": "OpeningsQuery",
     "operationKind": "query",
-    "text": "query OpeningsQuery {\n  getJobs {\n    id\n    name\n    stipend\n    designation\n    status\n    deadline\n    application_process\n  }\n}\n"
+    "text": "query OpeningsQuery {\n  getJobs {\n    id\n    name\n    type\n    stipend\n    designation\n    status\n    deadline\n    application_process\n  }\n}\n"
   }
 };
 })();
-(node as any).hash = '99c536c5525a22160e32940ed2281f12';
+(node as any).hash = '664ae50ed98ea1b68c69776a8d02600c';
 export default node;

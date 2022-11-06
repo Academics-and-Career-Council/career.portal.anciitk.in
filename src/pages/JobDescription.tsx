@@ -15,7 +15,7 @@ type Props = {
   query: GraphQLTaggedNode;
 };
 
-const { Title, Text } = Typography;
+const { Title } = Typography;
 const { Item } = Descriptions;
 
 const JobDescription: React.FC<Props> = ({ queryRef, query }) => {
@@ -24,6 +24,7 @@ const JobDescription: React.FC<Props> = ({ queryRef, query }) => {
   const {
     name,
     description,
+    type,
     deadline,
     designation,
     eligibility,
@@ -57,6 +58,7 @@ const JobDescription: React.FC<Props> = ({ queryRef, query }) => {
         contentStyle={{ fontSize: "large" }}
       >
         <Item label="Company Name">{name}</Item>
+        <Item label="Job type">{type}</Item>
         <Item label="Designation">{designation}</Item>
         <Item label="Job Location">{location}</Item>
         <Item label="Stipend">{stipend}</Item>
