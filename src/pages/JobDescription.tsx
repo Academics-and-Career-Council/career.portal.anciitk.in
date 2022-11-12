@@ -48,7 +48,7 @@ const JobDescription: React.FC<Props> = ({ queryRef, query }) => {
 
       <Descriptions
         bordered
-        style={{ width: "80%", textAlign: "center", margin: "0 auto" }}
+        style={{ width: "80%", textAlign: "left", margin: "0 auto" }}
         labelStyle={{
           fontWeight: "bolder",
           // width: "200px",
