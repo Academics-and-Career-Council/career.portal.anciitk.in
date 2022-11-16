@@ -38,13 +38,12 @@ const Dashboard: React.FC<Props> = ({ queryRef, query }) => {
           <div>No Latest news to show.</div>
         ) : (
           <Collapse
-            defaultActiveKey={0}
             expandIcon={({ isActive }) => (
               <CaretRightOutlined rotate={isActive ? 90 : 0} />
             )}
             accordion
             bordered={false}
-            style={{width: '100%'}}
+            style={{ width: '100%' }}
           >
             {data.getNotifications.map((news, index) => {
               return (
@@ -53,7 +52,7 @@ const Dashboard: React.FC<Props> = ({ queryRef, query }) => {
                   header={
                     <Space
                       align="end"
-                      style={{ justifyContent: "space-between", width: 'calc(100% - 25px)'}}
+                      style={{ justifyContent: "space-between", width: 'calc(100% - 25px)' }}
                     >
                       <Title level={5} style={{ margin: 0 }}>
                         {news?.heading}
