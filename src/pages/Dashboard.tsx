@@ -45,7 +45,7 @@ const Dashboard: React.FC<Props> = ({ queryRef, query }) => {
             bordered={false}
             style={{ width: '100%' }}
           >
-            {data.getNotifications.map((news, index) => {
+            {data.getNotifications.map(news => news).sort((a, b) => moment(a?.modified).diff(moment(b?.modified))).map((news, index) => {
               return (
                 <Panel
                   key={index}
